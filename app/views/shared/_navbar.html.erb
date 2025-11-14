@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="<%= root_path %>">@dEvicE</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav nav-underline ms-auto">
+        <li class="nav-item">
+          <%= nav_link "Home", root_path %>
+        </li>
+        <li class="nav-item">
+          <%= nav_link "Mouse", "#" %>
+        </li>
+        <li class="nav-item">
+          <%= nav_link "MousePad", "#" %>
+        </li>
+        <li class="nav-item">
+          <%= nav_link "Keyboard", "#" %>
+        </li>
+        <li class="nav-item">
+          <%= nav_link "Monitor", "#" %>
+        </li>
+        <li class="nav-item">
+          <%= nav_link "Headset", "#" %>
+        </li>
+        <li class="nav-item">
+          <%= nav_link "Mic", "#" %>
+        </li>
+        <li class="nav-item">
+          <%= nav_link "Desk Setup", "#" %>
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" }, class: "nav-link" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary ms-lg-2" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
