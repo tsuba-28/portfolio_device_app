@@ -1,0 +1,9 @@
+<h1>プロフィール</h1>
+
+<p>ニックネーム: <%= @profile.nickname %></p>
+<p>自己紹介: <%= @profile.bio %></p>
+
+<% if @profile.avatar.attached? %>
+  <p>アイコン画像:</p>
+  <%= image_tag @profile.avatar, size: "120x120" %>
+<% end %>
