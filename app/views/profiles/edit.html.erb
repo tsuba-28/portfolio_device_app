@@ -1,0 +1,31 @@
+<div class="container">
+  <ul>
+    <% @profile.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+
+  <%= form_with model: @profile, url: profile_path, method: 'put', local: true do |f| %>
+  <div>
+    <%= f.label :nickname, 'ハンドルネーム' %>
+  </div>
+  <div>
+    <%= f.text_field :nickname, class: 'text' %>
+  </div>
+
+  <div>
+    <%= f.label :usertag, 'ユーザータグ'%>
+  </div>
+  <div>
+    <%= f.text_field :usertag, class: 'text' %>
+  </div>
+
+  <div>
+    <%= f.label :bio, '自己紹介' %>
+  </div>
+  <div>
+    <%= f.text_area :bio  %>
+  </div>
+  <% end %>
+</div>
+
