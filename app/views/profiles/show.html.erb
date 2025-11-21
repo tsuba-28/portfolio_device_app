@@ -1,9 +1,26 @@
-<h1>プロフィール</h1>
+<div class="container profilePage">
+  <div class="profilePage_user">
+    <div class="profilePage_user_image">
+      <%= image_tag 'default-avatar.png' %>
+    </div>
 
-<p>ニックネーム: <%= @profile.nickname %></p>
-<p>自己紹介: <%= @profile.bio %></p>
+    <div class="profilePage_user_basicInfo">
+      <div class="profilePage_user_nickname">
+        <%= current_user.profile&.nickname %>
+      </div>
 
-<% if @profile.avatar.attached? %>
-  <p>アイコン画像:</p>
-  <%= image_tag @profile.avatar, size: "120x120" %>
-<% end %>
+      <div class="profilePage_user_usertag">
+        <%= current_user.usertag %>
+      </div>
+
+      <div class="profilePage_user_bio">
+        <%= current_user.profile.bio %>
+      </div>
+
+      <div class="profilePage_user_actionButton">
+        <%= link_to 'Edit Profile', edit_profile_path %>
+      </div>
+    </div>
+  </div>
+</div>
+
