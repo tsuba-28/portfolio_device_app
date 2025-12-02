@@ -13,6 +13,14 @@ class User < ApplicationRecord
   validates :username, length: { minimum: 3, maximum: 20 }
   validates :username, format: { with: /\A[a-zA-Z0-9_-]+\z/ }
 
+  def avatar_image
+    if profile.avatar&.attached?
+      profile.avatar
+    else
+      'default-avatar.png'
+    end
+  end
+
   private
     def create_default_profile
       create_profile
