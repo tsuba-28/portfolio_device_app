@@ -1,26 +1,86 @@
-<div class="container profilePage">
-  <div class="profilePage_user">
-    <div class="profilePage_user_image">
+<div class="container myPage">
+  <div class="myPage_user">
+    <div class="myPage_user_image">
       <%= image_tag current_user.avatar_image %>
     </div>
 
-    <div class="profilePage_user_basicInfo">
-      <div class="profilePage_user_nickname">
+    <div class="myPage_user_basicInfo">
+      <div class="myPage_user_nickname">
         <%= current_user.profile&.nickname %>
       </div>
 
-      <div class="profilePage_user_usertag">
+      <div class="myPage_user_usertag">
         <%= current_user.usertag %>
       </div>
 
-      <div class="profilePage_user_bio">
-        <%= current_user.profile.bio %>
+      <div class="myPage_user_bio">
+        <%= current_user.profile&.bio || "自己紹介文はまだ登録されていません" %>
       </div>
 
-      <div class="profilePage_user_actionButton">
+      <div class="myPage_user_actionButton">
         <%= link_to 'Edit Profile', edit_profile_path %>
       </div>
     </div>
   </div>
-</div>
 
+<div class="myPage_deskSetups">
+  <h2>Desk Setup</h2>
+
+  <div class="deskSetup-card-list">
+    <div class="deskSetup-card">
+      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
+      <div class="deskSetup-card-body">
+        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
+        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      </div>
+    </div>
+
+    <div class="deskSetup-card">
+      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
+      <div class="deskSetup-card-body">
+        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
+        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      </div>
+    </div>
+
+    <div class="deskSetup-card">
+      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
+      <div class="deskSetup-card-body">
+        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
+        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      </div>
+    </div>
+
+    <div class="deskSetup-card">
+      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
+      <div class="deskSetup-card-body">
+        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
+        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      </div>
+    </div>
+
+    <div class="deskSetup-card">
+      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
+      <div class="deskSetup-card-body">
+        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
+        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      </div>
+    </div>
+
+    <div class="deskSetup-card">
+      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
+      <div class="deskSetup-card-body">
+        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
+        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      </div>
+    </div>
+
+    <div class="deskSetup-card">
+      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
+      <div class="deskSetup-card-body">
+        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
+        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      </div>
+    </div>
+  </div>
+</div>
