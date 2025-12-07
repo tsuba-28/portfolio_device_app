@@ -1,0 +1,43 @@
+.myPage_myDevice {
+
+}
+
+.myDevice-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 220px);
+  gap: 15px;
+  justify-content: start;
+}
+
+.device-card {
+  background: #fff;
+  border-radius:  10px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  width: 100%;
+}
+
+.device-card:hover {
+  transform: translateY(-2px);
+  transition: 0.2s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.device-card-img {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+.device-card-body {
+  padding: 8px 4px 0;
+}
+
+.device-card-title {
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
