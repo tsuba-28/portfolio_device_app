@@ -1,26 +1,253 @@
-<div class="container profilePage">
-  <div class="profilePage_user">
-    <div class="profilePage_user_image">
+<div class="container myPage myPage-profile">
+  <div class="myPage-profile-bg">
+    <%= image_tag current_user.background_image %>
+  </div>
+
+  <div class="myPage-user">
+    <div class="myPage-user-image">
       <%= image_tag current_user.avatar_image %>
     </div>
 
-    <div class="profilePage_user_basicInfo">
-      <div class="profilePage_user_nickname">
-        <%= current_user.profile&.nickname %>
+    <div class="myPage-user-basicInfo">
+      <div class="myPage-user-header">
+        <div class="myPage-user-nickname">
+          <%= current_user.profile&.nickname %>
+        </div>
+
+        <div class="myPage-user-actionButton">
+          <%= link_to 'Edit Profile', edit_profile_path %>
+        </div>
       </div>
 
-      <div class="profilePage_user_usertag">
+      <div class="myPage-user-usertag">
         <%= current_user.usertag %>
       </div>
 
-      <div class="profilePage_user_bio">
-        <%= current_user.profile.bio %>
+      <div class="myPage-user-bio">
+        <%= current_user.profile&.bio || "自己紹介文はまだ登録されていません" %>
       </div>
+    </div>
+  </div>
+</div>
+<div class="myPage-deskSetup">
+  <h2 class="deskSetup-title">Desk Setup</h2>
 
-      <div class="profilePage_user_actionButton">
-        <%= link_to 'Edit Profile', edit_profile_path %>
+  <div class="deskSetup-card-list">
+    <div class="deskSetup-card">
+      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
+      <div class="deskSetup-card-body">
+        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
+        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      </div>
+    </div>
+
+    <div class="deskSetup-card">
+      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
+      <div class="deskSetup-card-body">
+        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
+        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      </div>
+    </div>
+
+    <div class="deskSetup-card">
+      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
+      <div class="deskSetup-card-body">
+        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
+        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      </div>
+    </div>
+
+    <div class="deskSetup-card">
+      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
+      <div class="deskSetup-card-body">
+        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
+        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      </div>
+    </div>
+
+    <div class="deskSetup-card">
+      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
+      <div class="deskSetup-card-body">
+        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
+        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      </div>
+    </div>
+
+    <div class="deskSetup-card">
+      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
+      <div class="deskSetup-card-body">
+        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
+        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      </div>
+    </div>
+
+    <div class="deskSetup-card">
+      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
+      <div class="deskSetup-card-body">
+        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
+        <p class="deskSetup-card-text">Desk setup description sample.</p>
       </div>
     </div>
   </div>
 </div>
 
+<div class="myPage-myDevice">
+  <h2 class="loadout-title">My Loadout</h2>
+
+  <div class="myDevice-container">
+    <div class="device-card">
+      <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
+      <div class="device-card-body">
+        <h5 class="device-card-title">Sample Device Name</h5>
+      </div>
+    </div>
+
+    <div class="device-card">
+      <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
+      <div class="device-card-body">
+        <h5 class="device-card-title">Sample Device Name</h5>
+      </div>
+    </div>
+
+    <div class="device-card">
+      <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
+      <div class="device-card-body">
+        <h5 class="device-card-title">Sample Device Name</h5>
+      </div>
+    </div>
+
+    <div class="device-card">
+      <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
+      <div class="device-card-body">
+        <h5 class="device-card-title">Sample Device Name</h5>
+      </div>
+    </div>
+
+    <div class="device-card">
+      <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
+      <div class="device-card-body">
+        <h5 class="device-card-title">Sample Device Name</h5>
+      </div>
+    </div>
+
+    <div class="device-card">
+      <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
+      <div class="device-card-body">
+        <h5 class="device-card-title">Sample Device Name</h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="myPage-deviceByCategory">
+  <section class="category-section">
+    <div class="category-header">
+      <h3 class="category-title">Mouse</h3>
+    </div>
+
+    <ul class="device-list">
+      <li class="device-card">
+        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
+        <div class="device-card-body">
+          <h5 class="device-card-title">Sample Device Name</h5>
+        </div>
+      </li>
+
+      <li class="device-card">
+        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
+        <div class="device-card-body">
+          <h5 class="device-card-title">Sample Device Name</h5>
+        </div>
+      </li>
+
+      <li class="device-card">
+        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
+        <div class="device-card-body">
+          <h5 class="device-card-title">Sample Device Name</h5>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="category-section">
+    <div class="category-header">
+      <h3 class="category-title">MousePad</h3>
+    </div>
+
+    <ul class="device-list">
+      <li class="device-card">
+        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
+        <div class="device-card-body">
+          <h5 class="device-card-title">Sample Device Name</h5>
+        </div>
+      </li>
+
+      <li class="device-card">
+        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
+        <div class="device-card-body">
+          <h5 class="device-card-title">Sample Device Name</h5>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="category-section">
+    <div class="category-header">
+      <h3 class="category-title">Keyboard</h3>
+    </div>
+
+    <ul class="device-list">
+      <li class="device-card">
+        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
+        <div class="device-card-body">
+          <h5 class="device-card-title">Sample Device Name</h5>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="category-section">
+    <div class="category-header">
+      <h3 class="category-title">Monitor</h3>
+    </div>
+
+    <ul class="device-list">
+      <li class="device-card">
+        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
+        <div class="device-card-body">
+          <h5 class="device-card-title">Sample Device Name</h5>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="category-section">
+    <div class="category-header">
+      <h3 class="category-title">Headset</h3>
+    </div>
+
+    <ul class="device-list">
+      <li class="device-card">
+        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
+        <div class="device-card-body">
+          <h5 class="device-card-title">Sample Device Name</h5>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="category-section">
+    <div class="category-header">
+      <h3 class="category-title">Mic</h3>
+    </div>
+
+    <ul class="device-list">
+      <li class="device-card">
+        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
+        <div class="device-card-body">
+          <h5 class="device-card-title">Sample Device Name</h5>
+        </div>
+      </li>
+    </ul>
+  </section>
+</div>

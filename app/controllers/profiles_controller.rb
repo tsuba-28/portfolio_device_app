@@ -26,7 +26,8 @@ class ProfilesController < ApplicationController
       params.require(:profile).permit(
         :nickname,
         :bio,
-        :avatar
+        :avatar,
+        :background
       )
     end
 
