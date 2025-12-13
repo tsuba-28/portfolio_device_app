@@ -21,6 +21,14 @@ class User < ApplicationRecord
     end
   end
 
+  def background_image
+    if profile.background&.attached?
+      profile.background
+    else
+      'default-background.jpg'
+    end
+  end
+
   private
     def create_default_profile
       create_profile
