@@ -1,4 +1,6 @@
 // Entry point for your Sass build
 @use "header";
-@use "mypage_desksetup";
-@use "mypage_mydevice";
+@use "mypage";
+@use "mypage-desksetup";
+@use "mypage-mydevice";
+@use "mypage-categorydevice";
