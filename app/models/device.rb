@@ -1,5 +1,5 @@
-class Category < ApplicationRecord
-  has_many :devices, dependent: :restrict_with_error
+class Device < ApplicationRecord
+  belongs_to :category
 
   validates :name, presence: true
   validates :slug, presence: true, uniqueness: true
