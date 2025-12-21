@@ -7,3 +7,19 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+categories = [
+  { name: "Mouse",    slug: "mouse",    position: 1 },
+  { name: "Mousepad", slug: "mousepad", position: 2 },
+  { name: "Keyboard", slug: "keyboard", position: 3 },
+  { name: "Monitor",  slug: "monitor",  position: 4 },
+  { name: "Headset",  slug: "headset",  position: 5 },
+  { name: "Mic",      slug: "mic",      position: 6 }
+]
+
+categories.each do |attrs|
+  Category.find_or_create_by!(slug: attrs[:slug]) do |category|
+    category.name     = attrs[:name]
+    category.position = attrs[:position]
+  end
+end
