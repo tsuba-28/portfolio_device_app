@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_23_131957) do
+ActiveRecord::Schema[8.0].define(version: 2026_01_04_110331) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -46,6 +46,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_23_131957) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
+
+  create_table "desk_setup_devices", force: :cascade do |t|
+    t.integer "desk_setup_id", null: false
+    t.integer "device_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["desk_setup_id", "device_id"], name: "index_desk_setup_devices_on_desk_setup_id_and_device_id", unique: true
+    t.index ["desk_setup_id"], name: "index_desk_setup_devices_on_desk_setup_id"
+    t.index ["device_id"], name: "index_desk_setup_devices_on_device_id"
   end
 
   create_table "desk_setups", force: :cascade do |t|
@@ -96,6 +106,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_23_131957) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "desk_setup_devices", "desk_setups"
+  add_foreign_key "desk_setup_devices", "devices"
   add_foreign_key "desk_setups", "users"
   add_foreign_key "devices", "categories"
   add_foreign_key "profiles", "users"

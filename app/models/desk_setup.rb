@@ -1,6 +1,9 @@
 class DeskSetup < ApplicationRecord
   belongs_to :user
 
+  has_many :desk_setup_devices, dependent: :destroy
+  has_many :devices, through: :desk_setup_devices
+
   has_many_attached :images
 
   validates :title, presence: true, length: { maximum: 30 }
