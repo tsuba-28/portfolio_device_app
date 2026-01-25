@@ -1,0 +1,29 @@
+<%= turbo_frame_tag "search_results" do %>
+  <% if @devices.present? %>
+    <ul style="list-style: none; padding: 0; margin-top: 10px;">
+      <% @devices.each do |device| %>
+        <li style="border-bottom: 1px solid #eee; padding: 8px 0; display: flex; justify-content: space-between; align-items: center;">
+          
+          <span>
+            <strong><%= device.brand_name %></strong> - <%= device.name %>
+          </span>
+
+          <button type="button" class="button_small" 
+          style="font-size: 0.8rem; padding: 2px 8px; border: 1px solid #ccc; background: #fff; cursor: pointer;"
+          data-action="click->device-picker#add" 
+          data-device-picker-id-param="<%= device.id %>" 
+          data-device-picker-brand-param="<%= device.brand_name %>"
+          data-device-picker-name-param="<%= device.name %>">
+            追加
+          </button>
+
+        </li>
+      <% end %>
+    </ul>
+
+  <% else %>
+    <p style="color: #888; font-size: 0.9rem; margin-top: 10px;">
+      見つかりませんでした
+    </p>
+  <% end %>
+<% end %>
