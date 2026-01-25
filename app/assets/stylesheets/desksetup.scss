@@ -1,0 +1,16 @@
+.form-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.form-left {
+  flex: 2;
+  background: #fff;
+  padding: 20px;
+}
+
+.form-right {
+  flex: 1;
+  padding: 20px;
+}

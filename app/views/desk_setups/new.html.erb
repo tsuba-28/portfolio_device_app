@@ -1,0 +1,54 @@
+<div class="container">
+  <%= form_with model: @desk_setup, local: true do |f| %>
+  <div class="form-layout">
+    <div class="form-left">
+    <div class="image-upload">
+        <div>
+        <%= f.label :images, '画像を選択して追加' %>
+      </div>
+      <div>
+        <%= f.file_field :images, multiple: true %>
+      </div>
+    </div>
+      <div>
+        <%= f.label :title, 'タイトル' %>
+      </div>
+      <div>
+        <%= f.text_field :title %>
+      </div>
+      <div>
+        <%= f.label :comments, 'コメント' %>
+      </div>
+      <div>
+        <%= f.text_area :comments %>
+      </div>
+    </div>
+    <div class="form-right">
+      <div data-controller="device-picker">
+        <button type="button"data-action="click->device-picker#toggle"data-device-picker-target="toggleButton"class="button_">
+          デバイスを追加
+        </button>
+        <div data-device-picker-target="selectedList">
+        </div>
+        <div data-device-picker-target="searchArea"class="hidden">
+          <div>
+            <input type="text" placeholder="デバイスを検索..." data-action="keydown->device-picker#search">
+            <%= turbo_frame_tag "search_results" do %>
+              <p>※ここに検索結果が表示されます</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div>
+        <%= f.text_field :add_device %>
+      </div>
+      <div>
+        <%=  %>
+      </div>
+      <div>
+        <%= f.submit '投稿' %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
