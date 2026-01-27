@@ -11,6 +11,10 @@
       </div>
     </div>
       <div>
+        <%= f.label :style_id, "スタイル / テーマ" %>
+        <%= f.collection_select :style_id, Style.order(position: :asc), :id, :name, include_blank: "選択してください" %>
+      </div>
+      <div>
         <%= f.label :title, 'タイトル' %>
       </div>
       <div>
