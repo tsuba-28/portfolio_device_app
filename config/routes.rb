@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   resource :profile, only: [:show, :edit, :update]
 
-  resources :desk_setups, only: [:show, :new, :create]
+  resources :desk_setups, only: [:show, :new, :create] do
+    collection do
+      post :add_device
+    end
+  end
 
   resources :devices, only: [] do
     collection do

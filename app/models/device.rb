@@ -3,6 +3,7 @@ class Device < ApplicationRecord
 
   has_many :desk_setup_devices, dependent: :destroy
   has_many :desk_setups, through: :desk_setup_devices
+  has_many_attached :images
 
   validates :name, presence: true
   validates :slug, presence: true, uniqueness: true

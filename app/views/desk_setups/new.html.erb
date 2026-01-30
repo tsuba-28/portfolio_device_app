@@ -35,10 +35,10 @@
         <%= f.text_field :title %>
       </div>
       <div>
-        <%= f.label :comments, 'コメント' %>
+        <%= f.label :content, 'コメント' %>
       </div>
       <div>
-        <%= f.text_area :comments %>
+        <%= f.text_area :content %>
       </div>
     </div>
     <div class="form-right">
@@ -57,11 +57,7 @@
           </div>
         </div>
       </div>
-      <div>
-        <%= f.text_field :add_device %>
-      </div>
-      <div>
-        <%=  %>
+      <div id="selected_devices">
       </div>
       <div>
         <%= f.submit '投稿' %>

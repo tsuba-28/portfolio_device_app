@@ -8,14 +8,7 @@
             <strong><%= device.brand_name %></strong> - <%= device.name %>
           </span>
 
-          <button type="button" class="button_small" 
-          style="font-size: 0.8rem; padding: 2px 8px; border: 1px solid #ccc; background: #fff; cursor: pointer;"
-          data-action="click->device-picker#add" 
-          data-device-picker-id-param="<%= device.id %>" 
-          data-device-picker-brand-param="<%= device.brand_name %>"
-          data-device-picker-name-param="<%= device.name %>">
-            追加
-          </button>
+        <%= button_to "追加", add_device_desk_setups_path(device_id: device.id), method: :post, class: "bg-black text-white px-4 py-2 rounded text-sm hover:bg-gray-800" %>
 
         </li>
       <% end %>

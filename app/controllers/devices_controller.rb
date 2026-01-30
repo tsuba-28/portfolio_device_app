@@ -5,7 +5,13 @@ class DevicesController < ApplicationController
     else
       @devices = Device.order(created_at: :desc).limit(10)
     end
-
     # render layout: false if turbo_frame_request?
+  end
+
+  private
+  def device_params
+    params.required(:device).permit(
+      :images
+    )
   end
 end

@@ -22,8 +22,20 @@ class DeskSetupsController < ApplicationController
     end
   end
 
+  def add_device
+    @device = Device.find(params[:device_id])
+    render turbo_stream: turbo_stream.append("selected_devices", partial: "selected_device", locals: { device: @device })
+  end
+
   private
   def desk_setup_params
-    params.required(:desk_setup).permit(:style_id, :title, :content, images: [], device_ids: [], tag_list: [] )
+    params.required(:desk_setup).permit(
+      :style_id,
+      :title,
+      :content,
+      images: [],
+      device_ids: [],
+      tag_list: []
+    )
   end
 end
