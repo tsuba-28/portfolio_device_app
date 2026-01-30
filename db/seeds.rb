@@ -38,3 +38,11 @@ styles.each do |attrs|
     style.position = attrs[:position]
   end
 end
+
+tags = [
+  "Whiteデスク", "Blackデスク", "木目調", "Mac", "Windows", "かわいい", "かっこいい", "ウルトラワイド", "マルチモニター", "パステル", "モダン", "DIY"
+]
+
+tags.each do |tag_name|
+  ActsAsTaggableOn::Tag.find_or_create_by(name: tag_name)
+end

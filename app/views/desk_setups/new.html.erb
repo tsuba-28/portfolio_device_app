@@ -15,6 +15,20 @@
         <%= f.collection_select :style_id, Style.order(position: :asc), :id, :name, include_blank: "選択してください" %>
       </div>
       <div>
+        <p>タグを選択</p>
+          <span>複数選択可能</span>
+        <div>
+          <%= f.collection_check_boxes :tag_list, ActsAsTaggableOn::Tag.all, :name, :name do |b| %>
+            <div>
+              <%= b.check_box %>
+              <%= b.label do %>
+                <span>#</span><%= b.text %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div>
         <%= f.label :title, 'タイトル' %>
       </div>
       <div>
