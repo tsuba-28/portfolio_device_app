@@ -1,0 +1,25 @@
+<div data-controller="images">
+  <div>
+    <%= f.label :images, 
+      style: "display: block; width: 100%; height: 200px; border: 2px dashed #ccc; text-align: center; padding-top: 50px;",
+      data: {
+        images_target: "dropZone", 
+        action: "dragover->images#dragOver dragleave->images#dragLeave drop->images#drop"
+      } do %>
+      <div>
+        <i class="far fa-images"></i>
+        <p>
+        <span>クリックしてアップロード</span> またはドラッグ&ドロップ（Max5枚）
+        </p>
+        <p>JPG / PNG. up to 5MB</p>
+      </div>
+      <%= f.file_field :images, multiple: true, class: "hidden",
+        data: {
+          images_target: "input", 
+          action: "change->images#preview"
+        }
+      %>
+    <% end %>
+  </div>
+  <div data-images-target="preview"></div>
+</div>

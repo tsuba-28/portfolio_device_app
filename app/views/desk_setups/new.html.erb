@@ -3,12 +3,7 @@
   <div class="form-layout">
     <div class="form-left">
     <div class="image-upload">
-        <div>
-        <%= f.label :images, '画像を選択して追加' %>
-      </div>
-      <div>
-        <%= f.file_field :images, multiple: true %>
-      </div>
+      <%= render'image_form', f: f %>
     </div>
       <div>
         <%= f.label :style_id, "スタイル / テーマ" %>
