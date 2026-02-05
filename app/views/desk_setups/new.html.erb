@@ -3,7 +3,7 @@
   <div class="form-layout">
     <div class="form-left">
     <div class="image-upload">
-      <%= render'image_form', f: f %>
+      <%= render 'image_form', f: f %>
     </div>
       <div>
         <%= f.label :style_id, "スタイル / テーマ" %>
@@ -11,7 +11,6 @@
       </div>
       <div>
         <%= f.label :tag_list, "タグ" %>
-
         <%= f.select :tag_list,
         DeskSetup.tags_on(:tags).map {|t| [t.name, t.name]},
         { include_blank: true },
@@ -34,12 +33,12 @@
     </div>
     <div class="form-right">
       <div data-controller="device-picker">
-        <button type="button"data-action="click->device-picker#toggle"data-device-picker-target="toggleButton"class="button_">
+        <button type="button" data-action="click->device-picker#toggle" data-device-picker-target="toggleButton" class="button_">
           デバイスを追加
         </button>
         <div data-device-picker-target="selectedList">
         </div>
-        <div data-device-picker-target="searchArea"class="hidden">
+        <div data-device-picker-target="searchArea" class="hidden">
           <div>
             <input type="text" placeholder="デバイスを検索..." data-action="keydown->device-picker#search">
             <%= turbo_frame_tag "search_results" do %>
