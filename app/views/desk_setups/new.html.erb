@@ -10,18 +10,14 @@
         <%= f.collection_select :style_id, Style.order(position: :asc), :id, :name, include_blank: "選択してください" %>
       </div>
       <div>
-        <p>タグを選択</p>
-          <span>複数選択可能</span>
-        <div>
-          <%= f.collection_check_boxes :tag_list, ActsAsTaggableOn::Tag.all, :name, :name do |b| %>
-            <div>
-              <%= b.check_box %>
-              <%= b.label do %>
-                <span>#</span><%= b.text %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
+        <%= f.label :tag_list, "タグ" %>
+
+        <%= f.select :tag_list,
+        DeskSetup.tags_on(:tags).map {|t| [t.name, t.name]},
+        { include_blank: true },
+        {multiple: true,
+        data: { controller: "tags" }
+        } %>
       </div>
       <div>
         <%= f.label :title, 'タイトル' %>
