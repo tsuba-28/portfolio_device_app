@@ -1,0 +1,28 @@
+<div id="selected_device_<%= device.id %>" class="flex items-center justify-between p-2 bg-white border border-gray-200 rounded-md shadow-sm mb-2 w-full">
+  
+  <div class="flex items-center gap-3 overflow-hidden">
+    <div class="flex-shrink-0 w-12 h-12 bg-gray-100 rounded-md flex items-center justify-center overflow-hidden border border-gray-100">
+      <% if device.images.attached? %>
+        <%= image_tag device.image, class: "w-full h-full object-cover" %>
+      <% else %>
+        <span class="text-[10px] text-gray-400 font-bold">No Img</span>
+      <% end %>
+    </div>
+
+    <div class="min-w-0">
+      <p class="text-[10px] text-gray-500 font-bold leading-tight truncate">
+        <%= device.brand_name %>
+      </p>
+      <p class="text-sm text-gray-800 font-medium leading-tight truncate">
+        <%= device.name %>
+      </p>
+    </div>
+  </div>
+
+  <input type="hidden" name="desk_setup[device_ids][]" value="<%= device.id %>">
+
+  <button type="button" onclick="this.closest('div[id^=selected_device_]').remove()" 
+    class="flex-shrink-0 ml-2 text-gray-400 hover:text-red-500 hover:bg-red-50 p-1.5 rounded-full transition-colors duration-200">
+    <i class="fa-solid fa-xmark text-sm"></i>
+  </button>
+</div>

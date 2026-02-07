@@ -1,0 +1,58 @@
+<div class="container">
+  <%= form_with model: @desk_setup, local: true do |f| %>
+  <div class="form-layout">
+    <div class="form-left">
+    <div class="image-upload">
+      <%= render 'image_form', f: f %>
+    </div>
+      <div>
+        <%= f.label :style_id, "スタイル / テーマ" %>
+        <%= f.collection_select :style_id, Style.order(position: :asc), :id, :name, include_blank: "選択してください" %>
+      </div>
+      <div>
+        <%= f.label :tag_list, "タグ" %>
+        <%= f.select :tag_list,
+        DeskSetup.tags_on(:tags).map {|t| [t.name, t.name]},
+        { include_blank: true },
+        {multiple: true,
+        data: { controller: "tags" }
+        } %>
+      </div>
+      <div>
+        <%= f.label :title, 'タイトル' %>
+      </div>
+      <div>
+        <%= f.text_field :title %>
+      </div>
+      <div>
+        <%= f.label :content, 'コメント' %>
+      </div>
+      <div>
+        <%= f.text_area :content %>
+      </div>
+    </div>
+    <div class="form-right">
+      <div data-controller="device-picker">
+        <button type="button" data-action="click->device-picker#toggle" data-device-picker-target="toggleButton" class="button_">
+          デバイスを追加
+        </button>
+        <div data-device-picker-target="selectedList">
+        </div>
+        <div data-device-picker-target="searchArea" class="hidden">
+          <div>
+            <input type="text" placeholder="デバイスを検索..." data-action="keydown->device-picker#search">
+            <%= turbo_frame_tag "search_results" do %>
+              <p>※ここに検索結果が表示されます</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div id="selected_devices">
+      </div>
+      <div>
+        <%= f.submit '投稿' %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

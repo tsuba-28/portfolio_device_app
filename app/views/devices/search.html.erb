@@ -1,0 +1,22 @@
+<%= turbo_frame_tag "search_results" do %>
+  <% if @devices.present? %>
+    <ul style="list-style: none; padding: 0; margin-top: 10px;">
+      <% @devices.each do |device| %>
+        <li style="border-bottom: 1px solid #eee; padding: 8px 0; display: flex; justify-content: space-between; align-items: center;">
+          
+          <span>
+            <strong><%= device.brand_name %></strong> - <%= device.name %>
+          </span>
+
+        <%= button_to "追加", add_device_desk_setups_path(device_id: device.id), method: :post, class: "bg-black text-white px-4 py-2 rounded text-sm hover:bg-gray-800" %>
+
+        </li>
+      <% end %>
+    </ul>
+
+  <% else %>
+    <p style="color: #888; font-size: 0.9rem; margin-top: 10px;">
+      見つかりませんでした
+    </p>
+  <% end %>
+<% end %>

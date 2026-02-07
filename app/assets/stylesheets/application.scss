@@ -4,3 +4,48 @@
 @use "mypage-desksetup";
 @use "mypage-mydevice";
 @use "mypage-categorydevice";
+@use "desksetup";
+
+.fas_button_radius{
+  border: none;
+  padding: 0 20px;
+  height: 44px;
+  line-height: 1;
+  background: #FFF450;
+  color: #51656f;
+  border-radius: 22px;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+
+  box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+  transition: 0.2s ease;
+}
+
+.fas_button_radius:hover{
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+.fas_button_radius:active{
+  transform: translateY(0);
+}
+
+.fas_button_radius:before{
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: '\f067';
+}
+
+.hidden {
+  display: none !important;
+}

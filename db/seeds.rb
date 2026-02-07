@@ -23,3 +23,26 @@ categories.each do |attrs|
     category.position = attrs[:position]
   end
 end
+
+styles = [
+  { name: "ミニマル", slug: "minimal", position: 1 },
+  { name: "ゲーミング", slug: "gaming", position: 2 },
+  { name: "ナチュラル", slug: "natural", position: 3 },
+  { name: "ワークスペース", slug: "workspace", position: 4 },
+  { name: "クリエイター", slug: "creator", position: 5 }
+]
+
+styles.each do |attrs|
+  Style.find_or_create_by!(slug: attrs[:slug]) do |style|
+    style.name     = attrs[:name]
+    style.position = attrs[:position]
+  end
+end
+
+tags = [
+  "Whiteデスク", "Blackデスク", "木目調", "Mac", "Windows", "かわいい", "かっこいい", "ウルトラワイド", "マルチモニター", "パステル", "モダン", "DIY"
+]
+
+tags.each do |tag_name|
+  ActsAsTaggableOn::Tag.find_or_create_by(name: tag_name)
+end
