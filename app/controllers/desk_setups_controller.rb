@@ -2,7 +2,12 @@ class DeskSetupsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @desk_setup = DeskSetup.all
+# N＋1問題を避けるために user, style, tagsテーブルを事前に取得（Eager Loading）
+    @desk_setup = DeskSetup.includes(:user, :style, :tags)
+
+    if params[:style_id].present?
+      @desk_setups = @desk_setups.where(style_id: params[:style_id])
+    end
   end
 
   def show
