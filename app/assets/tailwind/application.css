@@ -1,1 +1,35 @@
 @import "tailwindcss";
+
+/* Tom Selectのデザインを強制的に上書き */
+.ts-control {
+  border-radius: 6px !important;
+  border-color: #c7d2fe !important;
+}
+
+.ts-wrapper.multi .ts-control > div.item {
+  background-color: #eff6ff !important;
+  border: 1px solid #4182fa !important;
+  color: #4182fa !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+}
+
+/* 削除ボタン */
+.ts-wrapper.multi .ts-control > div.item .remove {
+  border-left: 1px solid #c7d2fe !important;
+  color: #4182fa !important;
+}
+
+/* 削除ボタン　ホバー　*/
+.ts-wrapper.multi .ts-control > div.item .remove:hover {
+  background-color: #4182fa !important;
+  color: #fff !important;
+}
+
+/* 共通コンポーネント用　（将来的に利用）　*/
+@layer components {
+  /* .tag-tech-blueクラスを定義　青いタグを使用できるように */
+  .tag-tech-blue {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#eff6ff] text-[#4182fa] border border-[#4182fa];
+  }
+}
