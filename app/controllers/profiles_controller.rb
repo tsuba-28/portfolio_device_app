@@ -9,10 +9,17 @@ class ProfilesController < ApplicationController
   end
 
   def update
+    if params[:profile][:remove_avatar] == "1"
+      @profile.avatar.purge
+    end
+
+    if params[:profile][:remove_background] == "1"
+      @profile.background.purge
+    end
+
     if @profile.update(profile_params)
-      redirect_to profile_path, notice: '更新できました'
+      redirect_to @profile, notice: '更新できました'
     else
-      flash.now[:error] = '更新できませんでした'
       render :edit, status: :unprocessable_entity
     end
   end
@@ -27,7 +34,9 @@ class ProfilesController < ApplicationController
         :nickname,
         :bio,
         :avatar,
-        :background
+        :background,
+        :remove_avatar,
+        :remove_background
       )
     end
 
