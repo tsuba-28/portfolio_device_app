@@ -1,5 +1,7 @@
 <div class="container mx-auto px-4 py-12 max-w-3xl">
-
+  <h1 class="text-3xl font-black mb-8 text-[#4182fa] tracking-tight">
+    <i class="fas fa-id-card mr-2"></i>My Profile
+  </h1>
   <% if @profile.errors.any? %>
     <div class="mb-6 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg">
       <ul class="list-disc list-inside text-sm">
@@ -53,29 +55,43 @@
           </div>
           
           <% if @profile.avatar.attached? %>
-            <div class="flex items-center space-x-2 bg-[#f4f6fb] px-4 py-2 rounded-full border border-[#c7d2fe] shadow-sm">
+            <div class="flex items-center space-x-2 bg-[#f4f6fb] px-4 py-2 rounded-lg border border-[#c7d2fe] shadow-sm">
               <%= f.check_box :remove_avatar, class: "rounded border-gray-300 text-[#4182fa] focus:ring-[#4182fa] cursor-pointer" %>
               <%= f.label :remove_avatar, "アイコンを削除", class: "text-[#1f2937] text-xs font-bold cursor-pointer m-0" %>
             </div>
           <% end %>
         </div>
 
-        <div class="max-w-lg mx-auto space-y-8 text-center">
+        <div class="max-w-lg mx-auto space-y-8">
 
-          <div>
-            <%= f.label :nickname, "ユーザーネーム", class: "block text-xl font-black text-[#1f2937] mb-2 tracking-widest border-b-2 border-[#c7d2fe] inline-block px-8 pb-1" %>
-            <%= f.text_field :nickname, class: "w-full bg-[#f4f6fb] border--[#c7d2fe] text-[#1f2937] text-center font-bold text-lg rounded-full py-3 px-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] focus:border-[#4182fa] placeholder-[#94a3b8] transition-all", placeholder: "ユーザーネームを入力" %>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex-1">
+              <%= f.label :nickname, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4 pb-1" do %>
+                <i class="fas fa-user text-[#4182fa]"></i> ユーザーネーム
+              <% end %>
+              <%= f.text_field :nickname, class: "w-full bg-[#f4f6fb] border-[#c7d2fe] text-[#1f2937] text-center font-bold text-lg rounded-lg py-3 px-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] focus:border-[#4182fa] placeholder-[#94a3b8] transition-all", placeholder: "ユーザーネームを入力" %>
+            </div>
+
+            <div class="flex-1">
+              <%= f.label :usertag, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4 pb-1" do %>
+                <i class="fas fa-user-tag text-[#4182fa]"></i> ユーザータグ
+              <% end %>
+              <%= f.text_field :usertag, class: "w-full bg-[#f4f6fb] border-[#c7d2fe] text-[#1f2937] text-center font-bold text-lg rounded-lg py-3 px-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] focus:border-[#4182fa] placeholder-[#94a3b8] transition-all", placeholder: "ユーザータグを入力" %>
+            </div>
           </div>
-
+          
           <div class="text-left">
-            <%= f.label :bio, "自己紹介", class: "block text-sm font-bold text-[#1f2937] mb-2 ml-4" %>
-            <%= f.text_area :bio, rows:6, class: "w-full bg-[#f4f6fb] border-none text-[#1f2937] rounded-xl p-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] placeholder-[#94a3b8] resize-none", placeholder: "自己紹介文を入力してください" %>
+            <%= f.label :bio, class: "block text-sm font-bold text-[#1f2937] mb-2 ml-4 " do %>
+              <i class="fas fa-pen-to-square text-[#4182fa]"></i> 自己紹介
+            <% end %>
+            <%= f.text_area :bio, rows:6, class: "w-full bg-[#f4f6fb] border-none text-[#1f2937] rounded-lg p-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] placeholder-[#94a3b8] resize-none", placeholder: "自己紹介文を入力してください" %>
+          </div>
+
+          <div class="mt-8 flex justify-end">
+          <%= f.submit '保存', class: "w-full bg-[#4182fa] hover:bg-[#2563eb] text-white font-bold py-3 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 cursor-pointer" %>
           </div>
         </div>
 
-        <div class="mt-8 flex justify-end">
-          <%= f.submit '保存', class: "bg-[#4182fa] hover:bg-[#2563eb] text-white font-black text-lg py-3 px-12 rounded-full shadow-lg transform hover:-translate-y-1 transition-all duration-200 cursor-pointer border-b-4 border-[#2563eb] active:border-b-0 active:translate-y-0" %>
-        </div>
       </div>
     <% end %>
   </div>
