@@ -12,21 +12,13 @@ class User < ApplicationRecord
   VALID_ALPHANUMERIC_REGEX = /\A[a-zA-Z0-9\-_]+\z/
 
   validates :username, presence: true,
-            presence: true,
+            uniqueness: true,
+            length: { minimum: 4, maximum: 15 },
             format: { with: VALID_ALPHANUMERIC_REGEX, message: "は半角英数字([-] [_])のみ使用可能です" }
 
-  validates :usertag,
-            presence: true,
-            length: { minimum: 4, maximum: 15 },
-            format: { with: VALID_ALPHANUMERIC_REGEX, message: "は半角英数字([-] [_])のみ使用可能です" },
-            uniqueness: { scope: :username, message: "とユーザー名の組み合わせは既に存在しています\n別のタグをお試しください" }
-
-  def display_id
-    "@#{username}##{usertag}"
-  end
 
   def avatar_image
-    if profile.avatar&.attached?
+    if profile&.avatar&.attached?
       profile.avatar
     else
       'default-avatar.png'
@@ -34,7 +26,7 @@ class User < ApplicationRecord
   end
 
   def background_image
-    if profile.background&.attached?
+    if profile&.background&.attached?
       profile.background
     else
       'default-background.jpg'

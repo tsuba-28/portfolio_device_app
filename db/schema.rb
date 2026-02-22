@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_21_190206) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_22_074101) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -87,7 +87,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_21_190206) do
     t.text "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "usertag", default: "", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -140,12 +139,10 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_21_190206) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "usertag", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["username", "usertag"], name: "index_users_on_username_and_usertag", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
-    t.index ["usertag"], name: "index_users_on_usertag"
+    t.index ["username"], name: "index_users_on_username_and_usertag", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

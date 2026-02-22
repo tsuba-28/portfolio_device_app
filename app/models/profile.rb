@@ -7,5 +7,4 @@ class Profile < ApplicationRecord
   attr_accessor :remove_avatar, :remove_background
 
   validates :nickname, presence: true
-  validates :usertag, presence: true
 end
