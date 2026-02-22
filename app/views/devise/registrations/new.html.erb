@@ -11,6 +11,7 @@
           <div class="flex-1">
             <%= f.label :username, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4 pb-1" do %>
               <i class="fas fa-user-tag text-[#4182fa]"></i> ユーザーID
+              <span class="ml-2 px-2 py-0.5 text-[10px] bg-[#4182fa]/10 text-[#4182fa] border border-[#4182fa]/30 rounded vertical-middle">必須</span>
             <% end %>
             <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "w-full bg-[#f4f6fb] border-[#c7d2fe] text-[#1f2937] text-center font-bold text-lg rounded-lg py-3 px-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] focus:border-[#4182fa] placeholder-[#94a3b8] transition-all", placeholder: "ユーザーIDを入力" %>
           </div>
@@ -18,6 +19,7 @@
           <div class="flex-1">
             <%= f.label :email, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4 pb-1" do %>
               <i class="fas fa-envelope text-[#4182fa]"></i> メールアドレス
+              <span class="ml-2 px-2 py-0.5 text-[10px] bg-[#4182fa]/10 text-[#4182fa] border border-[#4182fa]/30 rounded vertical-middle">必須</span>
             <% end %>
             <%= f.email_field :email, autocomplete: "email", class: "w-full bg-[#f4f6fb] border-[#c7d2fe] text-[#1f2937] text-center font-bold text-lg rounded-lg py-3 px-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] focus:border-[#4182fa] placeholder-[#94a3b8] transition-all", placeholder: "sample1234@sample.com" %>
           </div>
