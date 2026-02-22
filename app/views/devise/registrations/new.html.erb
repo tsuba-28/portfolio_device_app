@@ -1,34 +1,52 @@
-<h2>Sign up</h2>
+<div class="container mx-auto px-4 py-12 max-w-4xl">
+  <h1 class="text-3xl font-black mb-8 text-[#4182fa] tracking-tight">
+    <i class="fas fa-user-plus mr-2"></i>  アカウント新規作成
+  </h1>
+  <div class="bg-[#94a3b8] rounded-[2rem] border-4 border-[#4182fa] shadow-2xl overflow-hidden relative p-12">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="max-w-2xl mx-auto space-y-8">
+        <div class="flex flex-col gap-6">
+          <div class="flex-1">
+            <%= f.label :username, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4 pb-1" do %>
+              <i class="fas fa-user-tag text-[#4182fa]"></i> ユーザーID
+            <% end %>
+            <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "w-full bg-[#f4f6fb] border-[#c7d2fe] text-[#1f2937] text-center font-bold text-lg rounded-lg py-3 px-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] focus:border-[#4182fa] placeholder-[#94a3b8] transition-all", placeholder: "ユーザーIDを入力" %>
+          </div>
 
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+          <div class="flex-1">
+            <%= f.label :email, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4 pb-1" do %>
+              <i class="fas fa-envelope text-[#4182fa]"></i> メールアドレス
+            <% end %>
+            <%= f.email_field :email, autocomplete: "email", class: "w-full bg-[#f4f6fb] border-[#c7d2fe] text-[#1f2937] text-center font-bold text-lg rounded-lg py-3 px-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] focus:border-[#4182fa] placeholder-[#94a3b8] transition-all", placeholder: "sample1234@sample.com" %>
+          </div>
+
+          <div class="flex-1">
+            <%= f.label :password, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4 pb-1" do %>
+              <i class="fas fa-lock text-[#4182fa]"></i> 新しいパスワード
+            <% end %>
+            <% if @minimum_password_length %>
+              <p class="text-xs text-[#2563eb] mt-1">※半角英数字<%= @minimum_password_length %>文字以上</p>
+            <% end %>
+            <%= f.password_field :password, autocomplete: "new-password", class: "w-full bg-[#f4f6fb] border-[#c7d2fe] text-[#1f2937] text-center font-bold text-lg rounded-lg py-3 px-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] focus:border-[#4182fa] transition-all"  %>
+          </div>
+
+          <div class="flex-1">
+            <%= f.label :password_confirmation, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4 pb-1" do %>
+              <i class="fas fa-key text-[#4182fa]"></i> 新しいパスワード（再入力）
+            <% end %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full bg-[#f4f6fb] border-[#c7d2fe] text-[#1f2937] text-center font-bold text-lg rounded-lg py-3 px-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] focus:border-[#4182fa] transition-all"  %>
+          </div>
+        </div>
+
+        <div class="mt-8 flex justify-end">
+          <%= f.submit '新規登録', class: "w-full bg-[#4182fa] hover:bg-[#2563eb] text-white font-bold py-3 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 cursor-pointer" %>
+        </div>
+      </div>
+    <% end %>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
