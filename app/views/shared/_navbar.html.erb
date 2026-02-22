@@ -59,9 +59,14 @@
           </button>
 
           <div data-dropdown-target="menu" class="hidden absolute right-0 mt-2 w-48 bg-[#f4f6fb] rounded-xl shadow-xl border border-[#c7d2fe] py-1 z-50 origin-top-right ring-1 ring-black ring-opacity-5">
-            <%= link_to root_path, class: "block px-4 py-2 text-sm text-[#1f2937] hover:bg-blue-50 hover:text-[#4182fa]" do %>
+            <%= link_to profile_path, class: "block px-4 py-2 text-sm text-[#1f2937] hover:bg-blue-50 hover:text-[#4182fa]" do %>
               <i class="fas fa-user mr-2 text-[#c7d2fe]"></i> My page
             <% end %>
+
+            <%= link_to edit_user_registration_path, class: "block px-4 py-2 text-sm text-[#1f2937] hover:bg-blue-50 hover:text-[#4182fa]" do %>
+              <i class="fas fa-user-gear mr-2 text-[#2563eb]"></i> アカウント設定
+            <% end %>
+
             <%= link_to destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" }, class: "block px-4 py-2 text-sm text-red-500 hover:bg-red-50" do %>
               <i class="fas fa-sign-out-alt mr-2"></i> ログアウト
             <% end %>
