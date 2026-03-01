@@ -53,6 +53,8 @@ class User < ApplicationRecord
 
   private
     def create_default_profile
-      create_profile
+      default_nickname = self.username.presence || self.email.split('@').first
+
+      create_profile!(nickname: default_nickname)
     end
 end

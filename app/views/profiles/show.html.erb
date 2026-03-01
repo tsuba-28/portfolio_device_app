@@ -1,253 +1,127 @@
-<div class="container myPage myPage-profile">
-  <div class="myPage-profile-bg">
-    <%= image_tag current_user.background_image %>
-  </div>
+<div class="container mx-auto px-4 py-12 max-w-6xl">
+  <h1 class="text-3xl font-black mb-8 text-[#4182fa] tracking-tight">
+    <i class="fas fa-user"></i> マイページ
+  </h1>
 
-  <div class="myPage-user">
-    <div class="myPage-user-image">
-      <%= image_tag current_user.avatar_image %>
-    </div>
+  <div class="bg-[#94a3b8] rounded-[2rem] border-4 border-[#4182fa] shadow-2xl overflow-hidden relative">
+    <%# ヘッダー背景 %>
+    <div class="w-full h-48 bg-[#4182fa] bg-cover bg-center transition-all duration-500" style="<%= "background-image: url(#{url_for(@profile.background)});" if @profile.background.attached? %>"></div>
 
-    <div class="myPage-user-basicInfo">
-      <div class="myPage-user-header">
-        <div class="myPage-user-nickname">
-          <%= current_user.profile&.nickname %>
+    <div class="px-8 pb-8">
+      <%# アバターとボタン %>
+      <div class="relative -mt-20 mb-6 flex flex-col md:flex-row md:items-end justify-between">
+        <div class="relative group">
+          <div class="w-40 h-40 rounded-3xl border-4 border-white shadow-md overflow-hidden flex items-center justify-center bg-white">
+            <% if @profile.avatar.attached? %>
+              <%= image_tag @profile.avatar, class: "w-full h-full object-cover" %>
+            <% else %>
+              <i class="fas fa-user text-6xl text-[#94a3b8]"></i>
+            <% end %>
+          </div>
         </div>
 
-        <div class="myPage-user-actionButton">
-          <%= link_to 'Edit Profile', edit_profile_path %>
+        <div class="flex justify-end md:block mb-2 md:mb-4">
+          <%= link_to edit_profile_path, class: "whitespace-nowrap px-6 py-2 rounded-lg border border-[#4182fa] bg-white text-[#1f2937] font-bold hover:bg-[#4182fa] hover:text-white transition-all duration-200 text-sm md:text-base shadow-sm" do %>
+            プロフィール編集
+          <% end %>
         </div>
       </div>
 
-      <div class="myPage-user-usertag">
-        <%= current_user.usertag %>
+      <%# ニックネーム、ユーザーネーム %>
+      <div class="mt-4">
+        <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2 text-left">
+          <h2 class="text-4xl font-semibold text-[#1f2937] tracking-tighter uppercase">
+            <%= @profile.nickname %>
+          </h2>
+          <span class="text-lg font-light text-[#c7d2fe]">@<%= @profile.user.username %></span>
+          <div class="flex items-center gap-4 ml-2">
+            <%= link_to "#", class: "flex items-baseline gap-1 hover:underline decoration-[#2563eb]" do %>
+              <span class="text-lg font-black text-[#f4f6fb]">0</span>
+              <span class="text-sm font-bold text-[#c7d2fe]">フォロー中</span>
+            <% end %>
+            <div class="h-4 border-l border-[#f4f6fb]"></div>
+            <%= link_to "#", class: "flex items-baseline gap-1 hover:underline decoration-[#2563eb]" do %>
+              <span class="text-lg font-black text-[#f4f6fb]">0</span>
+              <span class="text-sm font-bold text-[#c7d2fe]">フォロワー</span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="w-full bg-[#f4f6fb] text-[#1f2937] rounded-lg p-6 shadow-inner mt-6">
+          <% if (bio = @profile.bio).present? %>
+            <%= simple_format(bio) %>
+          <% else %>
+            <p class="text-[#1f2937]/60">自己紹介文はまだ登録されていません</p>
+          <% end %>
+        </div>
       </div>
 
-      <div class="myPage-user-bio">
-        <%= current_user.profile&.bio || "自己紹介文はまだ登録されていません" %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="myPage-deskSetup">
-  <h2 class="deskSetup-title">Desk Setup</h2>
+      <div class="mb-24"></div>
 
-  <div class="deskSetup-card-list">
-    <div class="deskSetup-card">
-      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
-      <div class="deskSetup-card-body">
-        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
-        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      <%# デバイスリストセクション %>
+      <div class="flex flex-col items-center justify-center w-full mb-12">
+        <h2 class="flex items-center gap-2 text-2xl font-bold text-[#1f2937]">
+          <i class="fas fa-cubes mr-2 text-[#4182fa]"></i> My Device List
+        </h2>
       </div>
-    </div>
 
-    <div class="deskSetup-card">
-      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
-      <div class="deskSetup-card-body">
-        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
-        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      <div class="grid grid-cols-[repeat(auto-fill,200px)] gap-4 justify-center w-full">
+        <% if @devices.present? %>
+          <% @devices.each do |device| %>
+            <%= render 'shared/device_card', device: device %>
+          <% end %>
+        <% else %>
+          <div class="col-span-full py-12 flex flex-col items-center justify-center text-center">
+            <p class="text-[#2563eb] font-black mb-4 leading-relaxed">登録されているデバイスがありません<br>新しいDeskSetupと共に登録しましょう</p>
+            <%= link_to "新しいDeskSetupを投稿する", new_desk_setup_path, class: "px-6 py-2 bg-[#4182fa] text-[#f4f6fb] rounded-lg hover:bg-[#2563eb] transition-all text-sm font-bold shadow-lg" %>
+          </div>
+        <% end %>
       </div>
-    </div>
 
-    <div class="deskSetup-card">
-      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
-      <div class="deskSetup-card-body">
-        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
-        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      <div class="mb-24"></div>
+
+      <%# DeskSetUpリストセクション %>
+      <div class="flex flex-col items-center justify-center w-full mb-12">
+        <h2 class="flex items-center gap-2 text-2xl font-bold text-[#1f2937]">
+          <i class="fas fa-window-maximize mr-2 text-[#4182fa]"></i> My Desk SetUps
+        </h2>
       </div>
-    </div>
 
-    <div class="deskSetup-card">
-      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
-      <div class="deskSetup-card-body">
-        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
-        <p class="deskSetup-card-text">Desk setup description sample.</p>
+      <%# --- 横スクロールエリア --- %>
+      <div class="flex overflow-x-auto pb-8 gap-6 snap-x snap-mandatory scrollbar-hide">
+        <% @desk_setups.each do |setup| %>
+          <div class="flex-none w-[320px] snap-start">
+            <div class="bg-[#f4f6fb] rounded-2xl shadow-sm overflow-hidden border-3 border-[#4182fa]/80 hover:border-[#2563eb] transition-all duration-300 h-full">
+              <div class="overflow-hidden h-48">
+                <% if setup.images.attached? %>
+                  <%= image_tag setup.images.first, class: "w-full h-48 object-cover" %>
+                <% end %>
+              </div>
+
+              <div class="p-4">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-xs px-2 py-1 bg-[#4182fa]/10 text-[#4182fa] rounded-md font-bold">
+                    <%= setup.style.name %>
+                  </span>
+                </div>
+                <h2 class="font-bold text-[#1f2937] mb-2 truncate"><%= setup.title %></h2>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <% setup.tag_list.each do |tag| %>
+                    <span class="text-[10px] px-2 py-0.5 border border-[#4182fa]/30 text-[#4182fa] rounded-md font-medium bg-[#f4f6fb]/50">#<%= tag %></span>
+                  <% end %>
+                </div>
+                <%= link_to "詳細を見る", desk_setup_path(setup), class: "block w-full text-center py-2 bg-[#f4f6fb] text-[#4182fa] text-sm font-bold rounded-lg hover:bg-[#4182fa] hover:text-[#f4f6fb] transition-all border border-[#4182fa]/20" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
-    </div>
 
-    <div class="deskSetup-card">
-      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
-      <div class="deskSetup-card-body">
-        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
-        <p class="deskSetup-card-text">Desk setup description sample.</p>
-      </div>
-    </div>
-
-    <div class="deskSetup-card">
-      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
-      <div class="deskSetup-card-body">
-        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
-        <p class="deskSetup-card-text">Desk setup description sample.</p>
-      </div>
-    </div>
-
-    <div class="deskSetup-card">
-      <img src="https://placehold.co/400x300" class="deskSetup-card-img" alt="Desk setup sample">
-      <div class="deskSetup-card-body">
-        <h5 class="deskSetup-card-title">Desk Setup Title</h5>
-        <p class="deskSetup-card-text">Desk setup description sample.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="myPage-myDevice">
-  <h2 class="loadout-title">My Loadout</h2>
-
-  <div class="myDevice-container">
-    <div class="device-card">
-      <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
-      <div class="device-card-body">
-        <h5 class="device-card-title">Sample Device Name</h5>
-      </div>
-    </div>
-
-    <div class="device-card">
-      <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
-      <div class="device-card-body">
-        <h5 class="device-card-title">Sample Device Name</h5>
-      </div>
-    </div>
-
-    <div class="device-card">
-      <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
-      <div class="device-card-body">
-        <h5 class="device-card-title">Sample Device Name</h5>
-      </div>
-    </div>
-
-    <div class="device-card">
-      <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
-      <div class="device-card-body">
-        <h5 class="device-card-title">Sample Device Name</h5>
-      </div>
-    </div>
-
-    <div class="device-card">
-      <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
-      <div class="device-card-body">
-        <h5 class="device-card-title">Sample Device Name</h5>
-      </div>
-    </div>
-
-    <div class="device-card">
-      <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
-      <div class="device-card-body">
-        <h5 class="device-card-title">Sample Device Name</h5>
-      </div>
+      <% if @user.desk_setups.count > 10 %>
+        <div class="mt-8 text-center">
+          <%= link_to "すべての投稿を見る", desk_setups_path(user_id: @user.id), class: "px-6 py-2 border border-[#4182fa] text-[#4182fa] rounded-lg hover:bg-[#4182fa] hover:text-[#f4f6fe] transition-all text-sm font-bold" %>
+        </div>
+      <% end %>
     </div>
   </div>
-</div>
-
-<div class="myPage-deviceByCategory">
-  <section class="category-section">
-    <div class="category-header">
-      <h3 class="category-title">Mouse</h3>
-    </div>
-
-    <ul class="device-list">
-      <li class="device-card">
-        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
-        <div class="device-card-body">
-          <h5 class="device-card-title">Sample Device Name</h5>
-        </div>
-      </li>
-
-      <li class="device-card">
-        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
-        <div class="device-card-body">
-          <h5 class="device-card-title">Sample Device Name</h5>
-        </div>
-      </li>
-
-      <li class="device-card">
-        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
-        <div class="device-card-body">
-          <h5 class="device-card-title">Sample Device Name</h5>
-        </div>
-      </li>
-    </ul>
-  </section>
-
-  <section class="category-section">
-    <div class="category-header">
-      <h3 class="category-title">MousePad</h3>
-    </div>
-
-    <ul class="device-list">
-      <li class="device-card">
-        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
-        <div class="device-card-body">
-          <h5 class="device-card-title">Sample Device Name</h5>
-        </div>
-      </li>
-
-      <li class="device-card">
-        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
-        <div class="device-card-body">
-          <h5 class="device-card-title">Sample Device Name</h5>
-        </div>
-      </li>
-    </ul>
-  </section>
-
-  <section class="category-section">
-    <div class="category-header">
-      <h3 class="category-title">Keyboard</h3>
-    </div>
-
-    <ul class="device-list">
-      <li class="device-card">
-        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
-        <div class="device-card-body">
-          <h5 class="device-card-title">Sample Device Name</h5>
-        </div>
-      </li>
-    </ul>
-  </section>
-
-  <section class="category-section">
-    <div class="category-header">
-      <h3 class="category-title">Monitor</h3>
-    </div>
-
-    <ul class="device-list">
-      <li class="device-card">
-        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
-        <div class="device-card-body">
-          <h5 class="device-card-title">Sample Device Name</h5>
-        </div>
-      </li>
-    </ul>
-  </section>
-
-  <section class="category-section">
-    <div class="category-header">
-      <h3 class="category-title">Headset</h3>
-    </div>
-
-    <ul class="device-list">
-      <li class="device-card">
-        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
-        <div class="device-card-body">
-          <h5 class="device-card-title">Sample Device Name</h5>
-        </div>
-      </li>
-    </ul>
-  </section>
-
-  <section class="category-section">
-    <div class="category-header">
-      <h3 class="category-title">Mic</h3>
-    </div>
-
-    <ul class="device-list">
-      <li class="device-card">
-        <img src="https://placehold.co/180x120" class="device-card-img" alt="device sample">
-        <div class="device-card-body">
-          <h5 class="device-card-title">Sample Device Name</h5>
-        </div>
-      </li>
-    </ul>
-  </section>
 </div>

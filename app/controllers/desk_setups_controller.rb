@@ -3,7 +3,7 @@ class DeskSetupsController < ApplicationController
 
   def index
 # N＋1問題を避けるために user, style, tagsテーブルを事前に取得（Eager Loading）
-    @desk_setup = DeskSetup.includes(:user, :style, :tags)
+    @desk_setups = DeskSetup.includes(:user, :style, :tags)
 
     if params[:style_id].present?
       @desk_setups = @desk_setups.where(style_id: params[:style_id])
