@@ -27,5 +27,8 @@
   <body class="bg-[#0b1220] text-[#1f2937] min-h-screen font-sans antialiased">
   <%= render "shared/navbar" %>
     <%= yield %>
+    <% if controller_name == 'desk_setups' %>
+      <%= render 'shared/fab' %>
+    <% end %>
   </body>
 </html>
