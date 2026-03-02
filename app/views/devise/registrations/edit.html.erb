@@ -1,48 +1,67 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="container mx-auto px-4 py-12 max-w-4xl">
+  <h1 class="text-3xl font-black mb-8 text-[#4182fa] tracking-tight">
+    <i class="fas fa-gear mr-2"></i>  アカウント設定
+  </h1>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="bg-[#94a3b8] rounded-[2rem] border-4 border-[#4182fa] shadow-2xl overflow-hidden relative p-12">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+    
+      <div class="max-w-2xl mx-auto space-y-8">
+        <div class="flex flex-col gap-6">
+          <div class="flex-1">
+            <%= f.label :username, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4 pb-1" do %>
+              <i class="fas fa-user-tag text-[#4182fa]"></i> ユーザーID
+            <% end %>
+            <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "w-full bg-[#f4f6fb] border-[#c7d2fe] text-[#1f2937] text-center font-bold text-lg rounded-lg py-3 px-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] focus:border-[#4182fa] transition-all" %>
+          </div>
 
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
-  </div>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div class="bg-[#c7d2fe] border border-[#4182fa] rounded-lg p-4 mb-6 text-center">
+              <p class="text-sm font-bold text-[#1f2937]">
+                <i class="fas fa-envelope-circle-check text-[#4182fa] mr-2"></i>
+                現在、メールアドレスの承認待ちです: <span class="text-[#4182fa]"><%= resource.unconfirmed_email %></span>
+              </p>
+              <p class="text-[10px] mt-1 text-[#2563eb]">※メール内のリンクをクリックすると変更が完了します</p>
+            </div>
+          <% end %>
+          <div class="flex-1">
+            <%= f.label :email, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4 pb-1" do %>
+              <i class="fas fa-envelope text-[#4182fa]"></i> メールアドレス
+            <% end %>
+            <%= f.email_field :email, autocomplete: "email", class: "w-full bg-[#f4f6fb] border-[#c7d2fe] text-[#1f2937] text-center font-bold text-lg rounded-lg py-3 px-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] focus:border-[#4182fa] transition-all" %>
+          </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+          <div class="bg-[#99b8f1] p-6 rounded-2xl space-y-6">
+            <p class="text-sm font-bold text-[#1f2937] text-center opacity-80">
+              <i class="fas fa-info-circle"></i> パスワードを変更する場合のみ入力してください
+            </p>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+            <div>
+            <%= f.label :password_confirmation, "新しいパスワード", class: "block text-xs font-black text-[#1f2937] mb-2 ml-4" %>
+            <%= f.password_field :password_confirmation, placeholder: "6文字以上 (空欄の場合変更されません) ", class: "w-full bg-[#f4f6fb] border-2 border-transparent text-[#1f2937] text-center font-bold rounded-lg py-2 px-6 focus:border-[#4182fa] outline-none transition-all" %>
+            </div>
+          </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+          <div class="flex-1 pt-6 border-t border-white/20">
+            <%= f.label :current_password, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4" do %>
+              <i class="fas fa-shield-halved text-[#4182fa]"></i> 現在のパスワード <span class="ml-2 px-2 py-0.5 text-[10px] bg-[#4182fa]/10 text-[#4182fa] border border-[#4182fa]/30 rounded vertical-middle">必須</span>
+            <% end %>
+            <%= f.password_field :current_password, placeholder: "変更を保存するには現在のパスワードが必要です", class: "w-full bg-white border-2 border-[#2563eb] text-[#1f2937] text-center font-bold text-lg rounded-lg py-3 px-6 shadow-md focus:ring-4 focus:ring-[#2563eb]/20 outline-none transition-all" %>
+          </div>
+
+          <div class="mt-8">
+          <%= f.submit '設定を更新する', class: "w-full bg-[#4182fa] hover:bg-[#2563eb] text-white font-black py-4 rounded-lg shadow-[0_4px_0_rgb(37, 99, 235)] active:shadow-none active:-translate-y-[4px] transition-all cursor-pointer text-xl" %>
+          </div>
+        </div>
+      </div>
     <% end %>
+
+    <div class="mt-16 pt-8 border-t-4 border-dashed border-[#99b8f1] text-center">
+      <h2 class="text-[#4182fa] font-black mb-4">アカウントの削除</h2>
+      <%= button_to "アカウントを完全に削除する", registration_path(resource_name), data: { confirm: "本当に削除しますか？この操作は取り消しできません。", turbo_confirm: "本当に削除しますか？" }, method: :delete, class: "text-xs font-bold text-[#ff4b2b] hover:underline opacity-60 hover:opacity-100 transition-opacity" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+</div>
 
 <%= link_to "Back", :back %>

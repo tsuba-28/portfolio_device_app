@@ -2,20 +2,41 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :confirmable, :lockable
 
   has_one :profile, dependent: :destroy
   has_many :desk_setups, dependent: :destroy
 
   after_create :create_default_profile
 
-  validates :username, presence: true
-  validates :username, uniqueness: true
-  validates :username, length: { minimum: 3, maximum: 20 }
-  validates :username, format: { with: /\A[a-zA-Z0-9_-]+\z/ }
+# ログイン用仮想属性
+  attr_accessor :login
+
+
+# 正規表現用定数
+  VALID_ALPHANUMERIC_REGEX = /\A[a-zA-Z0-9\-_]+\z/
+
+  validates :username, presence: true,
+            uniqueness: { case_sensitive: false }, #大文字小文字を区別せず重複自体を禁止
+            length: { minimum: 4, maximum: 15 },
+            format: { with: VALID_ALPHANUMERIC_REGEX, message: "は半角英数字([-] [_])のみ使用可能です" }
+
+# ログイン時に下記の２つのルールに沿ってユーザーを検索
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    #フォームから送られてきた login の値を取得→一時変数に代入する
+    if (login = conditions.delete(:login))
+    #DBに対して、「username」または「email」にて大文字小文字無視して検索
+      where(conditions.to_h).where(["lower(username) = lower(:value) OR lower(email) = lower(:value)", { value: login }]).first
+    elsif conditions.has_key?(:username) || conditions.has_key?(:email)
+      where(conditions.to_h).first
+    end
+  end
+
 
   def avatar_image
-    if profile.avatar&.attached?
+    if profile&.avatar&.attached?
       profile.avatar
     else
       'default-avatar.png'
@@ -23,7 +44,7 @@ class User < ApplicationRecord
   end
 
   def background_image
-    if profile.background&.attached?
+    if profile&.background&.attached?
       profile.background
     else
       'default-background.jpg'
@@ -32,6 +53,8 @@ class User < ApplicationRecord
 
   private
     def create_default_profile
-      create_profile
+      default_nickname = self.username.presence || self.email.split('@').first
+
+      create_profile!(nickname: default_nickname)
     end
 end

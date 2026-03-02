@@ -1,16 +1,41 @@
-<h2>Forgot your password?</h2>
+<div class="container mx-auto px-4 py-12 max-w-4xl">
+  <h1 class="text-3xl font-black mb-8 text-[#4182fa] tracking-tight">
+    <i class="fas fa-arrows-rotate mr-2"></i>  パスワードの再設定
+  </h1>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="bg-[#94a3b8] rounded-[2rem] border-4 border-[#4182fa] shadow-2xl overflow-hidden relative p-12">
+    <div class="max-w-2xl mx-auto mb-10 text-center">
+      <p class="text-[#1f2937] font-bold text-lg leading-relaxed">
+        ご登録済みのメールアドレスを入力してください。<br>
+        パスワード再設定用のリンクをお送りします。
+      </p>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="max-w-2xl mx-auto space-y-8">
+
+        <div class="flex-1">
+          <%= f.label :email, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4 pb-1" do %>
+            <i class="fas fa-envelope text-[#4182fa]"></i> メールアドレス
+            <span class="ml-2 px-2 py-0.5 text-[10px] bg-[#4182fa]/10 text-[#4182fa] border border-[#4182fa]/30 rounded vertical-middle">必須</span>
+          <% end %>
+          <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "w-full bg-[#f4f6fb] border-[#c7d2fe] text-[#1f2937] text-center font-bold text-lg rounded-lg py-3 px-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] focus:border-[#4182fa] transition-all" %>
+        </div>
+
+        <div class="mt-8 flex justify-end">
+          <%= f.submit '送信する', class: "w-full bg-[#4182fa] hover:bg-[#2563eb] text-white font-bold py-3 px-4 rounded-lg transition-all duration-200 shadow-[0_4px_0_rgb(37, 99, 235)] active:shadow-none active:-translate-y-[4px] transition-all cursor-pointer text-xl tracking-widest" %>
+        </div>
+
+        <div class="text-center mt-6">
+          <%= link_to new_session_path(resource_name), class: "text-sm font-bold text-[#1f2937] hover:text-[#4182fa] transition-colors inline-flex items-center gap-2" do %>
+            <i class="fas fa-arrow-left text-[#4182fa]"></i> ログイン画面に戻る
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
+</div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
 
-<%= render "devise/shared/links" %>

@@ -1,33 +1,102 @@
-<div class="container">
-  <ul>
-    <% @profile.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-
-  <%= form_with model: @profile, url: profile_path, method: 'put', local: true do |f| %>
-  
-  <div>
-    <%= f.label :avatar, 'アイコン画像' %>
-  </div>
-  <div>
-    <%= f.file_field :avatar %>
-  </div>
-
-  <div>
-    <%= f.label :nickname, 'ハンドルネーム' %>
-  </div>
-  <div>
-    <%= f.text_field :nickname, class: 'text' %>
-  </div>
-
-  <div>
-    <%= f.label :bio, '自己紹介' %>
-  </div>
-  <div>
-    <%= f.text_area :bio  %>
-  </div>
-  <%= f.submit '保存', class: 'btn-primary' %>
+<div class="container mx-auto px-4 py-12 max-w-3xl">
+  <h1 class="text-3xl font-black mb-8 text-[#4182fa] tracking-tight">
+    <i class="fas fa-id-card mr-2"></i>My Profile
+  </h1>
+  <% if @profile.errors.any? %>
+    <div class="mb-6 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg">
+      <ul class="list-disc list-inside text-sm">
+        <% @profile.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
+
+  <div class="bg-[#94a3b8] rounded-[2rem] border-4 border-[#4182fa] shadow-2xl overflow-hidden relative">
+    <%= form_with model: @profile, url: profile_path, method: 'put', local: true do |f| %>
+
+      <div class="w-full relative group">
+        <div class="w-full h-48 bg-[#4182fa] bg-cover bg-center transition-all duration-500" style="<%= "background-image: url(#{url_for(@profile.background)});" if @profile.background.attached? %>">
+        </div>
+
+      <% if @profile.background.attached? %>
+        <div class="absolute top-4 right-4 z-10 bg-black/50 px-3 py-1.5 rounded-lg flex items-center space-x-2 backdrop-blur-sm border border-white/20">
+          <%= f.check_box :remove_background, class: "rounded border-gray-300 text-[#4182fa] focus:ring-[#4182fa] cursor-pointer" %>
+          <%= f.label :remove_background, "背景を削除", class: "text-white text-sm font-bold cursor-pointer" %>
+        </div>
+      <% end %>
+
+        <div class="absolute bottom-4 right-4 z-10">
+          <%= f.label :background, class: "w-10 h-10 bg-black/40 hover:bg-[#4182fa] text-white rounded-full flex items-center justify-center cursor-pointer backdrop-blur-sm transition-all border border-white/30 shadow-lg" do %>
+            <i class="fas fa-camera"></i>
+          <% end %>
+          <%= f.file_field :background, class: "hidden", accept: 'image/*' %>
+        </div>
+      </div>
+
+      <div class="px-8 pb-8">
+
+        <div class="relative -mt-20 mb-6 flex flex-col items-center">
+
+          <div class="relative group mb-4">
+            <div class="w-40 h-40 rounded-3xl bg-[#c7d2fe] border-4 border-white shadow-md overflow-hidden flex items-center justify-center bg-white">
+              <% if @profile.avatar.attached? %>
+                <%= image_tag @profile.avatar, class: "w-full h-full object-cover" %>
+              <% else %>
+                <i class="fas fa-user text-6xl text-[#94a3b8] absolute"></i>
+              <% end %>
+            </div>
+
+            <%= f.label :avatar, class: "absolute bottom-[-10px] right-[-10px] w-12 h-12 bg-[#94a1b8] rounded-full border-2 border-white flex items-center justify-center cursor-pointer hover:bg-[#4182fa] hover:border-[#4182fa] transition-all shadow-sm z-10" do %>
+              <i class="fas fa-camera text-lg text-white group-hover:text-white"></i>
+            <% end %>
+
+            <%= f.file_field :avatar, class: "hidden", accept: 'image/*' %>
+          </div>
+          
+          <% if @profile.avatar.attached? %>
+            <div class="flex items-center space-x-2 bg-[#f4f6fb] px-4 py-2 rounded-lg border border-[#c7d2fe] shadow-sm">
+              <%= f.check_box :remove_avatar, class: "rounded border-gray-300 text-[#4182fa] focus:ring-[#4182fa] cursor-pointer" %>
+              <%= f.label :remove_avatar, "アイコンを削除", class: "text-[#1f2937] text-xs font-bold cursor-pointer m-0" %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="max-w-lg mx-auto space-y-8">
+
+          <div class="flex flex-col md:flex-row gap-3 mb-6">
+            <div class="w-full md:w-[65%]">
+              <%= f.label :nickname, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4 pb-1" do %>
+                <i class="fas fa-user text-[#4182fa]"></i> ユーザーネーム
+              <% end %>
+              <%= f.text_field :nickname, class: "w-full bg-[#f4f6fb] border-[#c7d2fe] text-[#1f2937] text-center font-bold text-lg rounded-lg py-3 px-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] focus:border-[#4182fa] placeholder-[#94a3b8] transition-all", placeholder: "ユーザーネームを入力" %>
+            </div>
+
+            <div class="w-full md:w-[35%]">
+              <%= f.label :username, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4 pb-1" do %>
+                <i class="fas fa-user-tag text-[#4182fa]"></i> ユーザーID
+              <% end %>
+              <div class="w-full bg-[#f4f6fb] border border-[#94a3b8] text-[#c7d2fe] font-bold text-sm rounded-lg py-1.5 px-4 shadow-inner cursor-net-allowed flex items-center mt-7">
+                @<%= current_user.username %>
+              </div>
+              <p class="text-[10px] text-[#2563eb] mt-1 text-right whitespace-nowrap opacity-80">※IDはアカウント設定から変更できます</p>
+            </div>
+          </div>
+          
+          <div class="text-left">
+            <%= f.label :bio, class: "block text-sm font-bold text-[#1f2937] mb-2 ml-4 " do %>
+              <i class="fas fa-pen-to-square text-[#4182fa]"></i> 自己紹介
+            <% end %>
+            <%= f.text_area :bio, rows:6, class: "w-full bg-[#f4f6fb] border-none text-[#1f2937] rounded-lg p-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] placeholder-[#94a3b8] resize-none", placeholder: "自己紹介文を入力してください" %>
+          </div>
+
+          <div class="mt-8 flex justify-end">
+          <%= f.submit '保存', class: "w-full bg-[#4182fa] hover:bg-[#2563eb] text-white font-bold py-3 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 cursor-pointer" %>
+          </div>
+        </div>
+
+      </div>
+    <% end %>
+  </div>
 </div>
 

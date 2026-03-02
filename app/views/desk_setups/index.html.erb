@@ -1,6 +1,23 @@
-<h1>HOME</h1>
-<%= link_to  new_desk_setup_path do %>
-  <div class="fas_button_radius">
-    新規投稿
+<div class="container mx-auto px-4 py-8 max-w-7xl">
+
+  <div class="text-center mb-16">
+    <h1 class="text-4xl md:text-6xl font-black text-white mb-4 tracking-tighter italic">
+      SHOWCASE YOUR <span class="text-[#4182fa]">DESK</span>
+    </h1>
+    <p class="text-slate-400 font-medium italic">こだわりのデバイス、理想のセットアップを探そう</p>
   </div>
-<% end %>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <% if @desk_setups.present? %>
+      <% @desk_setups.each do |setup| %>
+        <div class="flex-none">
+          <%= render 'shared/desk_setup_card', setup: setup %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="col-span-full text-center py-20">
+        <p class="text-slate-500">まだ投稿がありません。最初の投稿をしてみませんか？</p>
+      </div>
+    <% end %>
+  </div>
+</div>

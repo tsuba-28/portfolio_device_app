@@ -1,26 +1,46 @@
-<h2>Log in</h2>
+<div class="container mx-auto px-4 py-12 max-w-4xl">
+  <h1 class="text-3xl font-black mb-8 text-[#4182fa] tracking-tight">
+    <i class="fas fa-right-to-bracket mr-2"></i>  ログイン
+  </h1>
+  
+  <div class="bg-[#94a3b8] rounded-[2rem] border-4 border-[#4182fa] shadow-2xl overflow-hidden relative p-12">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="max-w-2xl mx-auto space-y-8">
+      <div class="flex flex-col gap-6">
+        <div class="flex-1">
+          <%= f.label :login, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4 pb-1" do %>
+            <i class="fas fa-user text-[#4182fa]"></i> ユーザーID or メールアドレス
+          <% end %>
+          <%= f.text_field :login, autofocus: true, autocomplete: "email", class: "w-full bg-[#f4f6fb] border-[#c7d2fe] text-[#1f2937] text-center font-bold text-lg rounded-lg py-3 px-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] focus:border-[#4182fa] transition-all" %>
+        </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+        <div class="flex-1">
+          <%= f.label :password, class: "block text-sm font-black text-[#1f2937] mb-2 tracking-widest ml-4 pb-1" do %>
+            <i class="fas fa-lock text-[#4182fa]"></i> パスワード
+          <% end %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "w-full bg-[#f4f6fb] border-[#c7d2fe] text-[#1f2937] text-center font-bold text-lg rounded-lg py-3 px-6 shadow-inner focus:ring-2 focus:ring-[#4182fa] focus:border-[#4182fa] transition-all" %>
+        </div>
+        
+        <div class="flex items-center justify-between px-2 mt-2">
+          <%= link_to new_user_password_path, class: "text-[#1f2937] hover:text-[#4182fa] transition-colors" do %>
+          <i class="fas fa-circle-question text-[#4182fa]"></i> パスワードを忘れましたか？
+          <% end %>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+          <% if devise_mapping.rememberable? %>
+            <div class="flex items-center gap-1.5">
+              <%= f.check_box :remember_me, class: "w-4 h-4 rounded border-[#c7d2fe] text-[#4182fa] focus:ring-[#4182fa]" %>
+              <%= f.label :remember_me, class: "text-sm font-bold text-[#1f2937] cursor-pointer select-none" do %>
+                ログインしたままにする
+              <% end %>
+            </div>
+          <% end %>
+        </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+        <div class="mt-8 flex justify-end">
+          <%= f.submit 'ログイン', class: "w-full bg-[#4182fa] hover:bg-[#2563eb] text-white font-bold py-3 px-4 rounded-lg transition-all duration-200 shadow-[0_4px_0_rgb(37, 99, 235)] active:shadow-none active:-translate-y-[4px] transition-all cursor-pointer text-xl tracking-widest" %>
+        </div>
+      </div>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

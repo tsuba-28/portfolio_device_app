@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  resources :accounts, only: [:show]
+
   resource :profile, only: [:show, :edit, :update]
 
-  resources :desk_setups, only: [:show, :new, :create] do
+  resources :desk_setups, only: [:index, :show, :new, :create] do
     collection do
       post :add_device
     end

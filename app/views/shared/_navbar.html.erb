@@ -1,46 +1,84 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary ">
-  <div class="container-fluid main-header-inner">
-    <%= link_to "@dEvicE", root_path, class: "navbar-brand" %>
-    <div class="main-header-center">
-      <ul class="nav">
-        <li class="nav-item">
-          <%= nav_link "Home", root_path %>
-        </li>
-        <li class="nav-item">
-          <%= nav_link "Mouse", "#" %>
-        </li>
-        <li class="nav-item">
-          <%= nav_link "MousePad", "#" %>
-        </li>
-        <li class="nav-item">
-          <%= nav_link "Keyboard", "#" %>
-        </li>
-        <li class="nav-item">
-          <%= nav_link "Monitor", "#" %>
-        </li>
-        <li class="nav-item">
-          <%= nav_link "Headset", "#" %>
-        </li>
-        <li class="nav-item">
-          <%= nav_link "Mic", "#" %>
-        </li>
-        <li class="nav-item">
-          <%= nav_link "Desk Setup", "#" %>
-        </li>
-      </ul>
-    </div>
-    <div class="main-header-right">
-        <% if user_signed_in? %>
-          <div class="dropdown" data-controller="dropdown">
-            <%= image_tag current_user.avatar_image, class: 'header_avatar dropbtn', data: { action: "click->dropdown#toggle" } %>
-            <div class="dropdown-content" data-dropdown-target="menu">
-              <%= link_to 'My page', root_path, class: "dropdown-link" %>
-              <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" }, class: "dropdown-link" %>
-            </div>
+<nav class="sticky top-0 z-50 w-full bg-[#0b1220]/80 backdrop-blur-md border-b border-[#1f2937]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="grid grid-cols-3 items-center h-16">
+
+      <div class="flex justify-start relative" data-controller="dropdown">
+
+        <button type="button" data-action="click->dropdown#toggle" class="flex items-center space-x-1 text-[#94a3b8] hover:text-white font-medium text-sm px-3 py-2 rounded-md hover:bg-[#1f2937] transition-colors group">
+          <i class="fas fa-layer-group group-hover:text-[#4182fa] transition-colors"></i>
+          <span class="hidden sm:inline">スタイルを探す</span>
+          <i class="fas fa-chevron-down text-xs ml-1 text-[#4182fa]"></i>
+        </button>
+
+        <div data-dropdown-target="menu" class="hidden absolute left-0 top-full mt-2 w-56 bg-[#f4f6fb] rounded-xl shadow-xl border border-[#c7d2fe] z-50 overflow-hidden">
+          <div class="bg-blue-50/50 border-b border-[#c7d2fe]">
+            <%= link_to desk_setups_path, class: "block px-4 py-3 text-sm font-bold text-[#1f2937] hover:bg-blue-100/50 flex items-center justify-between group" do %>
+              <span>全ての投稿を見る</span>
+              <i class="fas fa-list text-[#4182fa]"></i>
+            <% end %>
           </div>
-        <% else %>
-            <%= link_to "新規登録", new_user_registration_path, class: 'header_loginBtn' %>
+
+          <div class="py-2">
+            <div class="px-4 py-1 text-xs font-bold text-[#94a3b8] uppercase tracking-wider mb-1">
+              スタイル一覧
+            </div>
+
+            <% Style.order(position: :asc).each do |style| %>
+              <%= link_to desk_setups_path(style_id: style.id), class: "block px-4 py-2 text-sm text-[#1f2937] hover:bg-blue-50 hover:text-[#4182fa] transition-colors flex items-center justify-between group" do %>
+                
+                <span><%= style.name %></span>
+
+                <% if params[:style_id].to_i == style.id %>
+                  <i class="fas fa-check text-[#4182fa] text-xs"></i>
+                <% end %>
+
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <%= link_to root_path, class: "text-2xl font-black tracking-tighter text-white hover:text-[#4182fa] transition-colors duration-300" do %>
+        @dEvicE
         <% end %>
+      </div>
+
+      <div class="flex justify-end items-center gap-4">
+        <% if user_signed_in? %>
+        <div class="relative " data-controller="dropdown">
+          <button type="button" data-action="click->dropdown#toggle" class="flex items-center focus:outline-none">
+            <% if current_user.avatar_image.present? %>
+              <%= image_tag current_user.avatar_image, class: "h-9 w-9 rounded-full object-cover border-2 border-[#1f2937] group-hover:border-[#4182fa] transition-all" %>
+            <% else %>
+              <div class="h-9 w-9 rounded-full bg-[#1f2937] border border-[#374151] flex items-center justify-center text-[#94a3b8] group-hover:text-white group-hover:border-[#4182fa] transition-all">
+                <i class="fas fa-user"></i>
+              </div>
+            <% end %>
+          </button>
+
+          <div data-dropdown-target="menu" class="hidden absolute right-0 mt-2 w-48 bg-[#f4f6fb] rounded-xl shadow-xl border border-[#c7d2fe] py-1 z-50 origin-top-right ring-1 ring-black ring-opacity-5">
+            <%= link_to profile_path, class: "block px-4 py-2 text-sm text-[#1f2937] hover:bg-blue-50 hover:text-[#4182fa]" do %>
+              <i class="fas fa-user mr-2 text-[#c7d2fe]"></i> My page
+            <% end %>
+
+            <%= link_to edit_user_registration_path, class: "block px-4 py-2 text-sm text-[#1f2937] hover:bg-blue-50 hover:text-[#4182fa]" do %>
+              <i class="fas fa-user-gear mr-2 text-[#2563eb]"></i> アカウント設定
+            <% end %>
+
+            <%= link_to destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" }, class: "block px-4 py-2 text-sm text-red-500 hover:bg-red-50" do %>
+              <i class="fas fa-sign-out-alt mr-2"></i> ログアウト
+            <% end %>
+          </div>
+        </div>
+
+        <% else %>
+          <%= link_to "ログイン", new_user_session_path, class: "text-sm font-bold text-[#94a3b8] hover:text-white transition-colors" %>
+          <%= link_to "新規登録", new_user_registration_path, class: "inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-bold rounded-lg text-white bg-[#4182fa] hover:bg-[#2563eb] shadow-lg shadow-blue-900/50 transition-all hover-translate-y-0.5" %>
+        <% end %>
+      </div>
+
     </div>
   </div>
 </nav>
