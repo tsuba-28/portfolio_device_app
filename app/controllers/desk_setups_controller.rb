@@ -12,6 +12,8 @@ class DeskSetupsController < ApplicationController
   end
 
   def show
+    @desk_setup = DeskSetup.includes(:style, :devices, :base_tags, user: :profile)
+                            .find(params[:id])
   end
 
   def new

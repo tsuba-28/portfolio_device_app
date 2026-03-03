@@ -1,0 +1,108 @@
+<div class="mx-auto px-4 pt-20 pb-16 max-w-7xl">
+  <div class="bg-[#eef2f6] rounded-3xl overflow-hidden shadow-2xl border border-slate-700 flex flex-col md:flex-row min-h-[750px]">
+
+    <div class="w-full md:w-1/2 bg-slate-200/50 flex items-center justify-center relative">
+      <div class="swiper mySwiper w-full h-full" data-controller="swiper">
+        <div class="swiper-wrapper">
+          <% @desk_setup.images.each do |image| %>
+            <div class="swiper-slide flex items-center justify-center">
+              <%= image_tag image, class: "max-w-full max-h-[700px] w-auto h-auto object-contain mx-auto shadow-md" %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="swiper-button-next !w-10 !h-10 bg-[#f4f6fb] backdrop-blur-sm rounded-full !text-[#4182fa] after:!text-sm shadow-sm hover:bg-white transition-all"></div>
+        <div class="swiper-button-prev !w-10 !h-10 bg-[#f4f6fb] backdrop-blur-sm rounded-full !text-[#4182fa] after:!text-sm shadow-sm hover:bg-white transition-all"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+
+    <div class="w-full md:w-1/2 p-8 flex flex-col">
+
+      <div class="flex items-center justify-between mb-6 h-6">
+
+        <div class="invisible">
+          <div class="flex items-center gap-1 text-[#FABEDC]">
+            <i class="fas fa-heart"></i>
+            <span class="font-bold text-xs text-slate-400">0</span>
+          </div>
+        </div>
+
+        <% if @desk_setup.user == current_user %>
+          <div class="text-[10px] text-slate-400 flex gap-3">
+            <%= link_to '編集', "#", class: "hover:text-[#4182fa] transition-colors font-bold" %>
+            <span class="text-slate-300">/</span>
+            <%= link_to '削除', "#", class: "hover:text-red-500 transition-colors font-bold" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+
+        <div class="flex items-center gap-2">
+          <span class="px-3 py-1 bg-blue-500/10 text-[#2563eb] rounded-md text-xs font-bold border border-blue-500/20">
+            <i class="fas fa-palette mr-1"></i><%= @desk_setup.style.name %>
+          </span>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <% @desk_setup.tag_list.each do |tag_name| %>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-md border border-[#4182fa] bg-[#eff6ff] text-[#4182fa] text-xs font-medium">
+              <%= tag_name %>
+            </span>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <h1 class="text-3xl font-extrabold text-slate-800 mb-2 tracking-tight">
+          <i class="fas fa-keyboard text-[#4182fa]"></i> <%= @desk_setup.title %>
+        </h1>
+      </div>
+
+      <div class="flex-grow">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-full bg-[#94a3b8] overflow-hidden">
+            <%= image_tag @desk_setup.user.profile.avatar if @desk_setup.user.profile.avatar.attached? %>
+          </div>
+          <span class="font-bold text-slate-700 text-lg"><%= @desk_setup.user.profile.nickname %></span>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border-2 border-[#4182fa]/50 shadow-sm mb-4">
+          <h3 class="text-xs font-bold text-[#4182fa] uppercase tracking-widest mb-3 flex items-center gap-2">
+            <i class="fas fa-comment-dots"></i>コメント
+          </h3>
+          <p class="text-slate-600 leading-relaxed text-sm lg:text-base">
+            <%= @desk_setup.content %>
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <div class="flex items-center justify-between border-t border-slate-400 pt-4 mb-6">
+          <h2 class="text-sm font-bold text-slate-500 uppercase tracking-widest">
+            <i class="fas fa-cubes text-[#4182fa]"></i> <%= @desk_setup.user.profile.nickname %>使用デバイス
+          </h2>
+          <%= link_to "#", class: "group text-[#4182fa] text-xs flex items-center gap-1 font-bold transition-all" do %>
+          すべてのデバイスを見る
+          <i class="fas fa-chevron-right text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+          <% end %>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <% if @desk_setup.devices.present? %>
+            <% @desk_setup.devices.limit(4).each do |device| %>
+              <%= render 'shared/device_card', device: device %>
+            <% end %>
+          <% else %>
+            <div class="col-span-full py-12 flex flex-col items-center justify-center text-center">
+              <p class="text-[#2563eb] font-black mb-4 leading-relaxed">
+              登録されているデバイスがありません
+              </p>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
