@@ -30,7 +30,7 @@
 
         <% if @desk_setup.user == current_user %>
           <div class="text-[10px] text-slate-400 flex gap-3">
-            <%= link_to '編集', "#", class: "hover:text-[#4182fa] transition-colors font-bold" %>
+            <%= link_to '編集', edit_desk_setup_path, class: "hover:text-[#4182fa] transition-colors font-bold" %>
             <span class="text-slate-300">/</span>
             <%= link_to '削除', "#", class: "hover:text-red-500 transition-colors font-bold" %>
           </div>

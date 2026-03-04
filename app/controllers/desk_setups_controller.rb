@@ -30,6 +30,10 @@ class DeskSetupsController < ApplicationController
     end
   end
 
+  def edit
+    @desk_setup = DeskSetup.find(params[:id])
+  end
+
   def add_device
     @device = Device.find(params[:device_id])
     render turbo_stream: turbo_stream.append("selected_devices", partial: "selected_device", locals: { device: @device })
