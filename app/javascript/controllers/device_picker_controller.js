@@ -3,18 +3,18 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="device-picker"
 export default class extends Controller {
 // 追加ボタンなど
-  static targets = ["searchArea", "toggleButton", "selectedList"]
+  static targets = ["searchArea", "toggleButton", "selectedList", "existingDevice", "deleteCheckbox"]
 
   toggle() {
 // ボタンを見えないようにする処理
     this.searchAreaTarget.classList.toggle("hidden")
   }
 // 検索処理
-  search(event) {
-    if (event.key === 'Enter') {
-      event.preventDefault()
+  search(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault()
 
-      const query = event.target.value
+      const query = e.target.value
       const frame = document.getElementById("search_results")
 
       if (frame) {
@@ -23,8 +23,18 @@ export default class extends Controller {
     }
   }
 
-  add(event) {
-    const { id, brand, name } = event.params
+  markForDeletion(e) {
+    const wrapper = e.currentTarget.closest('[data-device-picker-target="existingDevice"]')
+    const checkbox = wrapper.querySelector('[data-device-picker-target="deleteCheckbox"]')
+
+    if (checkbox) {
+      checkbox.checked = true         //隠しチェックボックスをONにする
+      wrapper.classList.add("hidden") //画面上から消す
+    }
+  }
+
+  add(e) {
+    const { id, brand, name } = e.params
 // 重複アラート
     const existingItem = this.selectedListTarget.querySelector(`input[value="${id}"]`)
     if (existingItem) {
@@ -58,7 +68,7 @@ export default class extends Controller {
     this.selectedListTarget.appendChild(wrapper)
   }
 // 要素を探して削除処理
-  remove(event) {
-    event.target.closest('.select-device-item').remove()
+  remove(e) {
+    e.target.closest('.select-device-item').remove()
   }
 }
