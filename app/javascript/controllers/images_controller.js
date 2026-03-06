@@ -20,6 +20,17 @@ export default class extends Controller {
     this.dataTransfer = new DataTransfer()
   }
 
+    //保存済みの画像を削除予約するメソッド
+  markForDeletion(e) {
+    const wrapper = e.currentTarget.closest('[data-images-target="existingImage"]')
+    const checkbox = wrapper.querySelector('[data-images-target="deleteCheckbox"]')
+
+    if (checkbox) {
+      checkbox.checked = true         //隠しチェックボックスをONにする
+      wrapper.classList.add("hidden") //画面上から消す
+    }
+  }
+
   handleFiles(files) {
     if(files.length === 0) return
 // 枚数制限チェック　「現在の枚数」＋「今回追加した枚数」にチェック
