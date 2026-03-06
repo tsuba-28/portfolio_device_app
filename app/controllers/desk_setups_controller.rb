@@ -34,6 +34,32 @@ class DeskSetupsController < ApplicationController
     @desk_setup = DeskSetup.find(params[:id])
   end
 
+  def update
+    @desk_setup = DeskSetup.find(params[:id])
+#既存画像の削除処理
+    if params[:desk_setup][:delete_image_ids].present?
+      params[:desk_setup][:delete_image_ids].each do |image_id|
+        #紐づいている画像の中から該当IDを探して削除
+        image = @desk_setup.images.find(image_id)
+        image.purge
+      end
+    end
+#デバイスの削除処理(紐付け解除)
+    if params[:desk_setup][:delete_device_ids].present?
+      @desk_setup.devices.delete(params[:desk_setup][:delete_device_ids])
+    end
+
+    if params[:desk_setup][:images].present?
+      @desk_setup.images.attach(params[:desk_setup][:images])
+    end
+
+    if @desk_setup.update(desk_setup_params)
+      redirect_to desk_setup_path(@desk_setup), notice: "更新できました！"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def add_device
     @device = Device.find(params[:device_id])
     render turbo_stream: turbo_stream.append("selected_devices", partial: "selected_device", locals: { device: @device })
