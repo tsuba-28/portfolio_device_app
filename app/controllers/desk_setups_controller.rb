@@ -60,6 +60,12 @@ class DeskSetupsController < ApplicationController
     end
   end
 
+  def destroy
+    desk_setup = DeskSetup.find(params[:id])
+    desk_setup.destroy!
+    redirect_to root_path, status: :see_other, notice: "削除することに成功しました！"
+  end
+
   def add_device
     @device = Device.find(params[:device_id])
     render turbo_stream: turbo_stream.append("selected_devices", partial: "selected_device", locals: { device: @device })
