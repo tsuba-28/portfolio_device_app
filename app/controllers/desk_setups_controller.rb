@@ -25,7 +25,6 @@ class DeskSetupsController < ApplicationController
     if @desk_setup.save
       redirect_to desk_setup_path(@desk_setup), notice: "投稿できました！"
     else
-      Rails.logger.debug "保存エラーの内容: #{@desk_setup.errors.full_messages}"
       render :new, status: :unprocessable_entity
     end
   end
@@ -40,8 +39,7 @@ class DeskSetupsController < ApplicationController
     if params[:desk_setup][:delete_image_ids].present?
       params[:desk_setup][:delete_image_ids].each do |image_id|
         #紐づいている画像の中から該当IDを探して削除
-        image = @desk_setup.images.find(image_id)
-        image.purge
+        @desk_setup.images.find(image_id).purge
       end
     end
 #デバイスの削除処理(紐付け解除)
@@ -49,11 +47,7 @@ class DeskSetupsController < ApplicationController
       @desk_setup.devices.delete(params[:desk_setup][:delete_device_ids])
     end
 
-    if params[:desk_setup][:images].present?
-      @desk_setup.images.attach(params[:desk_setup][:images])
-    end
-
-    if @desk_setup.update(desk_setup_params)
+    if @desk_setup.update(desk_setup_params.except(:images))
       redirect_to desk_setup_path(@desk_setup), notice: "更新できました！"
     else
       render :edit, status: :unprocessable_entity
