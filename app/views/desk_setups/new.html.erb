@@ -5,6 +5,7 @@
   </h1>
 
   <%= form_with model: @desk_setup, local: true do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
       <div class="lg:col-span-2 space-y-6">
