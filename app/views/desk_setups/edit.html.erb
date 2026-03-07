@@ -5,6 +5,7 @@
   </h1>
 
   <%= form_with model: @desk_setup, local: true do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
       <div class="lg:col-span-2 space-y-6">
@@ -88,29 +89,28 @@
 
           <div data-device-picker-target="searchArea" class="hidden mb-4 relative">
 
-            <div data-controller="device-picker">
-              <div id="selected_devices" date-device-picker-target="selectedList" class="space-y-3">
-                <div class="flex flex-nowrap overflow-x-auto gap-4 pb-4 scrollbar-hide">
-                  <% if @desk_setup.devices.present? %>
-                    <% @desk_setup.devices.each do |device| %>
-                      <div class="relative group flex-none w-48 " data-device-picker-target="existingDevice">
-                        <%= render 'shared/device_card', device: device %>
+            <div id="selected_devices" data-device-picker-target="selectedList" class="space-y-3">
+              <div class="flex flex-nowrap overflow-x-auto gap-4 pb-4 scrollbar-hide">
+                <% if @desk_setup.devices.present? %>
+                  <% @desk_setup.devices.each do |device| %>
+                    <div class="relative group flex-none w-48 " data-device-picker-target="existingDevice">
+                      <%= render 'shared/device_card', device: device %>
 
-                        <%= check_box_tag "desk_setup[delete_device_ids][]", device.id, false, class: "hidden", data: { device_picker_target: "deleteCheckbox" } %>
+                      <%= check_box_tag "desk_setup[delete_device_ids][]", device.id, false, class: "hidden", data: { device_picker_target: "deleteCheckbox" } %>
 
-                        <button type="button" class="absolute -top-2 -right-2 z-10 bg-white hover:bg-red-500 text-slate-500 hover:text-white rounded-lg shadow-md transition-colors duration-200 flex items-center justify-center w-7 h-7" 
-                          data-action="click->device-picker#markForDeletion">
-                            <i class="fa-solid fa-times text-xs"></i>
-                        </button>
-                      </div>
-                    <% end %>
-                  <% else %>
-                    <div class="col-span-full py-12 flex flex-col items-center justify-center text-center">
-                      <p class="text-[#2563eb] font-black mb-4 leading-relaxed">
-                      登録されているデバイスがありません
-                      </p>
+                      <button type="button" class="absolute -top-2 -right-2 z-10 bg-white hover:bg-red-500 text-slate-500 hover:text-white rounded-lg shadow-md transition-colors duration-200 flex items-center justify-center w-7 h-7" 
+                        data-action="click->device-picker#markForDeletion">
+                          <i class="fa-solid fa-times text-xs"></i>
+                      </button>
+                    </div>
                   <% end %>
-                </div>
+                <% else %>
+                  <div class="col-span-full py-12 flex flex-col items-center justify-center text-center">
+                    <p class="text-[#2563eb] font-black mb-4 leading-relaxed">
+                    登録されているデバイスがありません
+                    </p>
+                  </div>
+                <% end %>
               </div>
             </div>
           </div>
