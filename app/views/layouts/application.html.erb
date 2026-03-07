@@ -26,7 +26,18 @@
   </head>
 
   <body class="bg-[#0b1220] text-[#1f2937] min-h-screen font-sans antialiased">
-  <%= render "shared/navbar" %>
+    <%= render "shared/navbar" %>
+
+    <% flash.each do |key, value| %>
+      <div data-controller="flash" class="fixed top-5 right-5 z-50 p-4 rounded-lg shadow-xl text-[#f4f6fb] font-bold <%= key == 'notice' ? 'bg-blue-500' : 'bg-red-500' %>">
+        <div class="flex items-center gap-3">
+          <span><%= value %></span>
+          <button data-action="click->flash#dismiss" class="hover:text-[#94a3b8]">
+            <i class="fa-solid fa-times"></i>
+          </button>
+        </div>
+      </div>
+    <% end %>
     <%= yield %>
     <% if controller_name == 'desk_setups' %>
       <%= render 'shared/fab' %>
