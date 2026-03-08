@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:title) ? "#{yield(:title)} | @dEvicE" : "@dEvicE" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <script src="https://kit.fontawesome.com/03f0c5c061.js" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body class="bg-[#0b1220] text-[#f4f6fb] min-h-screen font-sans antialiased flex flex-col items-center justify-center">
+    <div class="container mx-auto px-4 text-center">
+      <%= yield %>
+    </div>
+  </body>
+</html>
