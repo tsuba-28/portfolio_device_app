@@ -41,7 +41,7 @@ class ProfilesController < ApplicationController
 
   private
     def set_profile
-      @profile = current_user.profile || current_user.create_profile
+      @profile = current_user.profile
     end
 
     def profile_params
