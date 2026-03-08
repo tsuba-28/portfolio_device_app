@@ -1,0 +1,37 @@
+<% content_for :title, "404 Not Found" %>
+
+<div class="flex flex-col items-center justify-center text-center px-4">
+
+  <div class="relative">
+    <h1 class="text-[120px] md:text-[200px] font-black text-transparent bg-clip-text bg-gradient-to-b from-[#4182fa] to-slate-800 leading-none select-none">
+      404
+    </h1>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20">
+      <i class="fa-solid fa-microchip text-[100px] text-[#4182fa] blur-sm"></i>
+    </div>
+  </div>
+
+  <div class="max-w-2xl space-y-6 -mt-4 md:-mt-8">
+    <h2 class="text-2xl md:text-3xl font-bold text-[#f4f6fb] tracking-tight">
+      NOT FOUND
+    </h2>
+
+    <p class="text-[#94a3b8] leading-relaxed">
+      お探しのページは、アクセスできない場所へ移動したか、接続が失われています。<br>
+      URLを再確認していただくか、ホームより再度検索してください。
+    </p>
+
+    <div class="pt-8">
+      <%= link_to root_path, class: "inline-flex items-center gap-2 bg-[#4182fa] hover:bg-[#2563eb] text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transform hover:-translate-y-1" do %>
+        <i class="fa-solid fa-house"></i>
+        ホームに戻る
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mt-20 flex gap-4 text-[#94a3b8]/20 text-4xl">
+    <i class="fa-solid fa-plug animate-pulse"></i>
+    <i class="fa-solid fa-wifi animate-bounce"></i>
+    <i class="fa-solid fa-keyboard animate-pulse" style="animation-delay: 0.5s;"></i>
+  </div>
+</div>
