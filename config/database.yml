@@ -35,3 +35,6 @@ production:
   queue:
     <<: *primary_production
     migrations_paths: db/queue_migrate
+  cache:
+    <<: *primary_production
+    migrations_paths: db/cache_migrate
