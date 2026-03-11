@@ -3,6 +3,27 @@ ja:
     attributes:
       user:
         current_password: "現在のパスワード"
+        username: "ユーザーID"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認用）"
+      profile:
+        nickname: "ユーザーネーム"
+        bio: "自己紹介"
+      desk_setup:
+        title: "タイトル"
+        content: "コメント"
+        style_id: "スタイル"
+      device:
+        name: "デバイス名"
+        brand_name: "ブランド名"
     errors:
       messages:
         blank: "を入力してください"
+    models:
+      user: "ユーザー"
+      profile: "プロフィール"
+      desk_setup: "デスク環境（セットアップ）"
+      device: "デバイス"
+      category: "カテゴリ"
+      style: "スタイル"

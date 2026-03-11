@@ -5,7 +5,7 @@
   </h1>
 
   <%= form_with model: @desk_setup, local: true do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
+    <%= render partial: 'shared/error_messages', locals: { object: f.object } %>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
       <div class="lg:col-span-2 space-y-6">
@@ -20,8 +20,9 @@
             <div>
               <%= f.label :style_id, class: "flex items-center gap-2 mb-2 text-sm font-bold text-[#1f2937]" do %>
                 <i class="fas fa-layer-group text-[#4182fa]"></i> スタイル / テーマ
+                <span class="ml-2 px-2 py-0.5 text-[10px] bg-[#4182fa]/10 text-[#4182fa] border border-[#4182fa]/30 rounded vertical-middle">必須</span>
               <% end %>
-              <%= f.collection_select :style_id, Style.order(position: :asc), :id, :name, { include_blank: "選択してください" }, { class: "w-full bg-white border-[#c7d2fe] rounded-md text-[#1f2937] focus:border-[#4182fa] focus:ring-[#4182fa] hover:cursor-pointer" } %>
+              <%= f.collection_select :style_id, Style.order(position: :asc), :id, :name, { include_blank: "選択してください" }, { required: true, class: "w-full bg-white border-[#c7d2fe] rounded-md text-[#1f2937] focus:border-[#4182fa] focus:ring-[#4182fa] hover:cursor-pointer" } %>
             </div>
 
             <div>
@@ -40,8 +41,9 @@
         <div class="bg-[#f4f6fb] p-6 rounded-xl border border-[#c7d2fe] shadow-sm">
           <%= f.label :title, class: "flex items-center gap-2 mb-2 text-sm font-bold text-[#1f2937]" do %>
             <i class="fas fa-keyboard text-[#4182fa]"></i> タイトル
+            <span class="ml-2 px-2 py-0.5 text-[10px] bg-[#4182fa]/10 text-[#4182fa] border border-[#4182fa]/30 rounded vertical-middle">必須</span>
           <% end %>
-          <%= f.text_field :title, class: "w-full bg-white border-[#c7d2fe] rounded-md text-[#1f2937] placeholder-[#94a3b8] focus:border-[#4182fa] focus:ring-[#4182fa]", placeholder: "タイトルを追加" %>
+          <%= f.text_field :title, required: true, class: "w-full bg-white border-[#c7d2fe] rounded-md text-[#1f2937] placeholder-[#94a3b8] focus:border-[#4182fa] focus:ring-[#4182fa]", placeholder: "タイトルを追加" %>
         </div>
 
         <div class="bg-[#f4f6fb] p-6 rounded-xl border border-[#c7d2fe] shadow-sm">
