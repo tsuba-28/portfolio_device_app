@@ -1,0 +1,26 @@
+<footer class="bg-[#0b1220] text-[#c7d2fe] py-3 mt-auto border-t border-[#1e293b]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+
+      <div class="mb-4 md:mb-0">
+        <p class="text-sm">
+          &copy; <%= Time.current.year %> @dEvicE. All rights reserved.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+        <%= link_to "利用規約", terms_path, class: "hover:text-[#4182fa] transition" %>
+        <%= link_to "プライバシーポリシー", privacy_path, class: "hover:text-[#4182fa] transition" %>
+
+        <a href="https://github.com/tsuba-28/portfolio_device_app" target="_blank" rel="noopener noreferrer" class="hover:text-[#4182fa] transition text-lg" aria-label="GitHub">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        
+        <a href="https://x.com/t_resk4" target="_blank" rel="noopener noreferrer" class="hover:text-[#4182fa] transition text-lg" aria-label="X (Twitter)">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>

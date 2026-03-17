@@ -25,7 +25,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-[#0b1220] text-[#1f2937] min-h-screen font-sans antialiased">
+  <body class="bg-[#0b1220] text-[#1f2937] min-h-screen font-sans antialiased flex flex-col">
     <%= render "shared/navbar" %>
 
     <% flash.each do |key, value| %>
@@ -38,9 +38,13 @@
         </div>
       </div>
     <% end %>
-    <%= yield %>
+    <main class="flex-grow">
+      <%= yield %>
+    </main>
     <% if controller_name == 'desk_setups' %>
       <%= render 'shared/fab' %>
     <% end %>
+
+    <%= render 'shared/footer' %>
   </body>
 </html>
