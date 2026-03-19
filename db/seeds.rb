@@ -7,6 +7,15 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+#ゲストユーザーのプロフィール変更データ
+guest_user = User.guest
+
+guest_profile = guest_user.profile
+
+guest_profile.update!(
+  nickname: "ゲストアカウント", 
+  bio: "本ポートフォリオアプリ「@dEvicE」をご覧いただき、ありがとうございます！\nこちらはアプリの機能を体験いただくためのゲストアカウントになります。\n\nUIの確認や、実際の投稿機能などをご自由にお試しください。\n（※他のユーザーへの影響を防ぐため、このアカウント自体の編集・退会はロックされています）"
+)
 
 categories = [
   { name: "Mouse",    slug: "mouse",    position: 1 },
