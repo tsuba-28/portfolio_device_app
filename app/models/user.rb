@@ -50,6 +50,13 @@ class User < ApplicationRecord
     end
   end
 
+  def self.guest
+    find_or_create_by!(email: 'guestguest33@sample.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.username = "Guest333"
+    end
+  end
+
   private
     def create_default_profile
       default_nickname = self.username.presence || self.email.split('@').first

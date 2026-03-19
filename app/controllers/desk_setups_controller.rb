@@ -1,5 +1,6 @@
 class DeskSetupsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :check_guest_user, only: [:update, :destroy]
 
   def index
 # N＋1問題を避けるために user, style, tagsテーブルを事前に取得（Eager Loading）
@@ -66,6 +67,12 @@ class DeskSetupsController < ApplicationController
   end
 
   private
+  def check_guest_user
+    if current_user.email == 'guestguest33@sample.com'
+    redirect_to desk_setup_path, alert: "ゲストユーザーは閲覧のみ可能です。保存 / 削除は行えません。"
+    end
+  end
+
   def desk_setup_params
     params.required(:desk_setup).permit(
       :style_id,

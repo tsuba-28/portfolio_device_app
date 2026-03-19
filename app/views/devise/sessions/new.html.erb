@@ -43,5 +43,18 @@
       </div>
     </div>
   <% end %>
+  <div class="max-w-2xl mx-auto mt-12">
+      <div class="relative flex py-5 items-center">
+        <div class="flex-grow border-t-2 border-[#1f2937]/20"></div>
+        <span class="flex-shrink-0 mx-4 text-[#1f2937] text-sm font-bold tracking-widest">または</span>
+        <div class="flex-grow border-t-2 border-[#1f2937]/20"></div>
+      </div>
+
+      <div class="mt-4 w-full">
+        <%= button_to '/users/guest_sign_in', method: :post, data: { turbo: false }, form_class: "w-full", class: "w-full flex justify-center items-center bg-[#1e40af] hover:bg-[#1d3557] text-white font-bold py-3 px-4 rounded-lg transition-all duration-200  active:shadow-none active:translate-y-[4px] cursor-pointer text-xl tracking-widest" do %>
+          <i class="fas fa-user-check mr-2 text-[#4182fa]"></i> ゲストログイン
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

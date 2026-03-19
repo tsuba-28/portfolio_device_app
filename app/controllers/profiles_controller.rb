@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_profile
+  before_action :check_guest_user, only: [:update]
 
   def show
     @profile = current_user.profile
@@ -42,6 +43,12 @@ class ProfilesController < ApplicationController
   private
     def set_profile
       @profile = current_user.profile
+    end
+
+    def check_guest_user
+      if current_user.email == 'guestguest33@sample.com'
+      redirect_to edit_profile_path, alert: "ゲストユーザーは閲覧のみ可能です。変更は保存されません。"
+      end
     end
 
     def profile_params
