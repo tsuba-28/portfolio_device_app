@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   get "terms", to: "pages#terms"
   get "privacy", to: "pages#privacy"
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
+
+  devise_scope :users do
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+  end
+
 
   resources :accounts, only: [:show]
 
