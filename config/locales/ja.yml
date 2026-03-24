@@ -7,6 +7,7 @@ ja:
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "パスワード（確認用）"
+        login: "ユーザーIDやメールアドレス"
       profile:
         nickname: "ユーザーネーム"
         bio: "自己紹介"
