@@ -29,14 +29,16 @@
     <%= render "shared/navbar" %>
 
     <% flash.each do |key, value| %>
-      <div data-controller="flash" class="fixed top-5 right-5 z-50 p-4 rounded-lg shadow-xl text-[#f4f6fb] font-bold <%= key == 'notice' ? 'bg-blue-500' : 'bg-red-500' %>">
-        <div class="flex items-center gap-3">
-          <span><%= value %></span>
-          <button data-action="click->flash#dismiss" class="hover:text-[#94a3b8]">
-            <i class="fa-solid fa-times"></i>
-          </button>
+      <% if value.is_a?(String) %>
+        <div data-controller="flash" class="fixed top-5 right-5 z-50 p-4 rounded-lg shadow-xl text-[#f4f6fb] font-bold <%= key == 'notice' ? 'bg-blue-500' : 'bg-red-500' %>">
+          <div class="flex items-center gap-3">
+            <span><%= value %></span>
+            <button data-action="click->flash#dismiss" class="hover:text-[#94a3b8]">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
     <main class="flex-grow">
       <%= yield %>
