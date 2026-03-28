@@ -38,14 +38,17 @@ class DeskSetupsController < ApplicationController
     @desk_setup = DeskSetup.find(params[:id])
 #既存画像の削除処理
     if params[:desk_setup][:delete_image_ids].present?
-      params[:desk_setup][:delete_image_ids].each do |image_id|
+      image_ids = params[:desk_setup][:delete_image_ids].reject(&:blank?)#空文字""を除外してエラー対策
+      image_ids.each do |image_id|
         #紐づいている画像の中から該当IDを探して削除
         @desk_setup.images.find(image_id).purge
       end
     end
 #デバイスの削除処理(紐付け解除)
     if params[:desk_setup][:delete_device_ids].present?
-      @desk_setup.devices.delete(params[:desk_setup][:delete_device_ids])
+      device_ids = params[:desk_setup][:delete_device_ids].reject(&:blank?)#空文字""を除外
+      devices_to_delete = @desk_setup.devices.where(id: device_ids)
+      @desk_setup.devices.delete(devices_to_delete)
     end
 
     if @desk_setup.update(desk_setup_params.except(:images))
