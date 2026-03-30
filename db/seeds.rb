@@ -18,21 +18,23 @@ guest_profile.update!(
 )
 
 categories = [
-  { name: "Mouse",    slug: "mouse",    position: 1 },
-  { name: "Mousepad", slug: "mousepad", position: 2 },
-  { name: "Keyboard", slug: "keyboard", position: 3 },
-  { name: "Monitor",  slug: "monitor",  position: 4 },
-  { name: "Headset",  slug: "headset",  position: 5 },
-  { name: "Mic",      slug: "mic",      position: 6 },
-  { name: "Others",   slug: "others",   position: 7 }
+  { name: "Mouse",    name_ja: "マウス",       slug: "mouse",    position: 1 },
+  { name: "Mousepad", name_ja: "マウスパッド",  slug: "mousepad", position: 2 },
+  { name: "Keyboard", name_ja: "キーボード",    slug: "keyboard", position: 3 },
+  { name: "Monitor",  name_ja: "モニター",      slug: "monitor",  position: 4 },
+  { name: "Headset",  name_ja: "ヘッドセット",   slug: "headset",  position: 5 },
+  { name: "Mic",      name_ja: "マイク",        slug: "mic",      position: 6 },
+  { name: "Others",   name_ja: "その他",        slug: "others",   position: 7 }
 ]
 
 categories.each do |attrs|
-  Category.find_or_create_by!(slug: attrs[:slug]) do |category|
-    category.name     = attrs[:name]
-    category.position = attrs[:position]
+  category = Category.find_or_initialize_by(slug: attrs[:slug])
+  category.update!(
+    name:      attrs[:name],
+    name_ja:   attrs[:name_ja],
+    position:  attrs[:position]
+  )
   end
-end
 
 styles = [
   { name: "ミニマル", slug: "minimal", position: 1 },
