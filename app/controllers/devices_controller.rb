@@ -8,7 +8,7 @@ class DevicesController < ApplicationController
       categories_table = Category.arel_table
 
       #カラムごとに一致条件を変更
-      @devices = Device.joins(:category).where(
+      @devices = Device.joins(:category).includes(:category).where(
         devices_table[:brand_name].matches(partial_keyword)
         .or(devices_table[:name].matches(partial_keyword))
         .or(categories_table[:name].matches(exact_keyword))
