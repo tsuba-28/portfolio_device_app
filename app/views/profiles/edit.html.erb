@@ -16,8 +16,8 @@
     <%= form_with model: @profile, url: profile_path, method: 'put', local: true do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <div class="w-full relative group">
-        <div class="w-full h-48 bg-[#4182fa] bg-cover bg-center transition-all duration-500" style="<%= "background-image: url(#{url_for(@profile.background)});" if @profile.background.attached? %>">
+      <div class="w-full relative group" data-controller="profile-preview">
+        <div class="w-full h-48 bg-[#4182fa] bg-cover bg-center transition-all duration-500" style="<%= "background-image: url(#{url_for(@profile.background)});" if @profile.background.attached? %>" data-profile-preview-target="preview">
         </div>
 
       <% if @profile.background.attached? %>
@@ -31,7 +31,7 @@
           <%= f.label :background, class: "w-10 h-10 bg-black/40 hover:bg-[#4182fa] text-white rounded-full flex items-center justify-center cursor-pointer backdrop-blur-sm transition-all border border-white/30 shadow-lg" do %>
             <i class="fas fa-camera"></i>
           <% end %>
-          <%= f.file_field :background, class: "hidden", accept: 'image/*' %>
+          <%= f.file_field :background, class: "hidden", accept: 'image/*', data: { profile_preview_target: "input", action: "change->profile-preview#display" } %>
         </div>
       </div>
 
@@ -39,12 +39,13 @@
 
         <div class="relative -mt-20 mb-6 flex flex-col items-center">
 
-          <div class="relative group mb-4">
+          <div class="relative group mb-4" data-controller="profile-preview">
             <div class="w-40 h-40 rounded-3xl bg-[#c7d2fe] border-4 border-white shadow-md overflow-hidden flex items-center justify-center bg-white">
               <% if @profile.avatar.attached? %>
-                <%= image_tag @profile.avatar, class: "w-full h-full object-cover" %>
+                <%= image_tag @profile.avatar, class: "w-full h-full object-cover", data: { profile_preview_target: "preview" } %>
               <% else %>
-                <i class="fas fa-user text-6xl text-[#94a3b8] absolute"></i>
+                <i class="fas fa-user text-6xl text-[#94a3b8] absolute" data-profile-preview-target="icon"></i>
+                <img class="hidden w-full h-full object-cover absolute top-0 left-0" data-profile-preview-target="preview">
               <% end %>
             </div>
 
@@ -52,7 +53,7 @@
               <i class="fas fa-camera text-lg text-white group-hover:text-white"></i>
             <% end %>
 
-            <%= f.file_field :avatar, class: "hidden", accept: 'image/*' %>
+            <%= f.file_field :avatar, class: "hidden", accept: 'image/*', data: { profile_preview_target: "input", action: "change->profile-preview#display" } %>
           </div>
           
           <% if @profile.avatar.attached? %>
