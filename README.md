@@ -407,6 +407,22 @@ categories.each do |attrs|
   end
 ```
 
+### 9. 📖 デスク環境一覧・詳細表示機能
+
+| デスク環境一覧(TOPページ)フロー |
+| :---: |
+| <img width="800" height="432" alt="2026-03-3023 10 48-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/c64867f8-076a-4f5c-9891-e1cfe0306daa" /> |
+
+| 詳細フロー |
+| :---: |
+| <img width="800" height="432" alt="2026-03-3023 25 58-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/87787944-5211-4f66-8ac4-523c3330a02f" /> |
+
+- TOPページにて投稿されているデスク環境を一覧で確認することができます。
+- 詳細を見るボタンをクリックすることで対象のデスク環境の詳細情報、下記３つの情報を追加で確認することが可能です。
+  - 1 複数枚の投稿画像
+  - 2 コメント
+  - 3 登録されているデバイス 
+
 ## ✨ 工夫したところ
 
 ### 🛠️ 技術面の工夫
