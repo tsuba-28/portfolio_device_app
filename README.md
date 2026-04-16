@@ -470,4 +470,4 @@ categories.each do |attrs|
 
 ---
 
-[![X](https://img.shields.io/badge/X-%23000000.svg?style=for-the-badge&logo=X&logoColor=white)](https://x.com/t_resk4)
+[![X](https://img.shields.io/badge/X-%23000000.svg?style=for-the-badge&logo=X&logoColor=white)](https://x.com/t_resk4) [![Qiita](https://img.shields.io/badge/Qiitaで紹介記事を読む-%2355C500.svg?style=for-the-badge&logo=qiita&logoColor=white)](https://qiita.com/tsuba-28/items/117b3143cffd1dbea7f6)
