@@ -1,0 +1,28 @@
+<%= turbo_frame_tag "like_button_#{desk_setup.id}" do %>
+
+  <% liked = Like.exists?(user: current_user, desk_setup: desk_setup) %>
+  <% likes_count = Like.where(desk_setup: desk_setup).count %>
+
+  <div class="flex items-center gap-1">
+    <% if liked %>
+      <%= link_to desk_setup_like_path(desk_setup),
+        data: { turbo_method: :delete },
+        class: "flex items-center gap-1 text-[#FABEDC]" do %>
+        <i class="fas fa-heart"></i>
+        <span class="font-bold text-xs text-slate-400">
+          <%= likes_count %>
+        </span>
+      <% end %>
+    <% else %>
+      <%= link_to desk_setup_like_path(desk_setup),
+        data: { turbo_method: :post },
+        class: "flex items-center gap-1 text-slate-400 hover:text-[#FABEDC] transition" do %>
+        <i class="far fa-heart"></i>
+        <span class="font-bold text-xs text-slate-400">
+          <%= likes_count %>
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+
+<% end %>
