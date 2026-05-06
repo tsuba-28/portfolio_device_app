@@ -6,6 +6,7 @@ class DeskSetup < ApplicationRecord
 
   has_many :desk_setup_devices, dependent: :destroy
   has_many :devices, through: :desk_setup_devices
+  has_many :likes, dependent: :destroy
 
   has_many_attached :images
 

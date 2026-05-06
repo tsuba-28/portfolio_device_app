@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
   has_many :desk_setups, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   after_create :create_default_profile
 
