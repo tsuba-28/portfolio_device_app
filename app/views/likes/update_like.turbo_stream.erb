@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "like_button_#{@desk_setup.id}" do %>
+
+  <%= render "likes/like_button", desk_setup: @desk_setup %>
+
+<% end %>

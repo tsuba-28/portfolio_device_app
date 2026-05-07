@@ -63,6 +63,10 @@
               <i class="fas fa-user mr-2 text-[#c7d2fe]"></i> マイページ
             <% end %>
 
+            <%= link_to favorites_path, class: "block px-4 py-2 text-sm text-[#1f2937] hover:bg-blue-50 hover:text-[#4182fa]" do %>
+              <i class="fa-regular fa-heart mr-2 text-[#c7d2fe]"></i> いいね
+            <% end %>
+
             <%= link_to edit_user_registration_path, class: "block px-4 py-2 text-sm text-[#1f2937] hover:bg-blue-50 hover:text-[#4182fa]" do %>
               <i class="fas fa-user-gear mr-2 text-[#2563eb]"></i> アカウント設定
             <% end %>

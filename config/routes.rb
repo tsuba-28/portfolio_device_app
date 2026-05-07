@@ -14,7 +14,12 @@ Rails.application.routes.draw do
 
   resource :profile, only: [:show, :edit, :update]
 
+  resources :favorites, only: [:index]
+
   resources :desk_setups, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+
+    resource :like, only: [:create, :destroy]
+
     collection do
       post :add_device
     end
